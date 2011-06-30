@@ -17,6 +17,8 @@ public class AreaDeTrabajo extends javax.swing.JPanel {
 
         agregar.addActionListener(controlador);
         ayuda.addActionListener(controlador);
+        restaurar.addActionListener(controlador);
+        guardar.addActionListener(controlador);
 
         jScrollPane1.setViewportView(lienzoController.getVista());
     }
@@ -33,6 +35,8 @@ public class AreaDeTrabajo extends javax.swing.JPanel {
         interprete = new javax.swing.JRadioButton();
         agregar = new javax.swing.JButton();
         ayuda = new javax.swing.JButton();
+        restaurar = new javax.swing.JButton();
+        guardar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -57,6 +61,10 @@ public class AreaDeTrabajo extends javax.swing.JPanel {
 
         ayuda.setText("Ayuda");
 
+        restaurar.setText("Restaurar");
+
+        guardar.setText("Guardar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -72,31 +80,38 @@ public class AreaDeTrabajo extends javax.swing.JPanel {
                     .addComponent(maquina))
                 .addGap(18, 18, 18)
                 .addComponent(agregar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(guardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(restaurar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ayuda)
                 .addContainerGap())
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {interprete, maquina, programa, radioCompildor});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {agregar, ayuda});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {agregar, ayuda, guardar, restaurar});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(radioCompildor)
-                            .addComponent(maquina))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(programa)
-                            .addComponent(interprete))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(guardar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(restaurar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(radioCompildor)
+                                .addComponent(maquina))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(programa)
+                                .addComponent(interprete)))))
                 .addContainerGap())
         );
 
@@ -133,15 +148,25 @@ public class AreaDeTrabajo extends javax.swing.JPanel {
     public JButton getAyuda() {
         return ayuda;
     }
+
+    public JButton getGuardar() {
+        return guardar;
+    }
+
+    public JButton getRestaurar() {
+        return restaurar;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
     private javax.swing.JButton ayuda;
+    private javax.swing.JButton guardar;
     private javax.swing.JRadioButton interprete;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton maquina;
     private javax.swing.JRadioButton programa;
     private javax.swing.JRadioButton radioCompildor;
+    private javax.swing.JButton restaurar;
     private javax.swing.ButtonGroup tipoComponente;
     // End of variables declaration//GEN-END:variables
 }
