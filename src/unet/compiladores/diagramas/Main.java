@@ -32,6 +32,7 @@ public class Main extends JFrame {
 
         this.getContentPane().add(controlador.getVista());
         mainFrame = this;
+        System.out.println("linea de prueba");
     }
 
     @SuppressWarnings("unchecked")
