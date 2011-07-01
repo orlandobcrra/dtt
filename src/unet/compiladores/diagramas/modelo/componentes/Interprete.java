@@ -19,7 +19,7 @@ public class Interprete extends Figura {
         poligono.addPoint(0, 0);
         poligono.addPoint(40, 0);
         poligono.addPoint(40, 80);
-        //poligono.addPoint(20, 100);       
+        //poligono.addPoint(20, 100);
         poligono.addPoint(0, 80);
     }
 
@@ -39,5 +39,17 @@ public class Interprete extends Figura {
     @Override
     public String toString() {
         return "Interprete " + l + " " + m;
+    }
+
+    public void pegar(Compilador c) {
+        Point px=new Point(c.posicion.x, c.posicion.y);
+        px.x+=40;
+        px.y+=80;
+       this.setPosicion(px);
+    }
+    
+    public void unir(Compilador c){
+        c.x.add(this);
+        System.out.println("unido");
     }
 }

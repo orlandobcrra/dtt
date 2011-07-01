@@ -21,6 +21,7 @@ public class Main extends JFrame {
     public static final String DB_NAME = "database1";
 
     public Main() {
+        mainFrame = this;
         initComponents();
         Dimension fullscreen = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension ventana = new Dimension(fullscreen.width - fullscreen.width / 10, fullscreen.height - fullscreen.height / 10);
@@ -31,8 +32,10 @@ public class Main extends JFrame {
         AreaDeTrabajoController controlador = new AreaDeTrabajoController(modelo);
 
         this.getContentPane().add(controlador.getVista());
-        mainFrame = this;
-        System.out.println("linea de prueba");
+
+        setTitulo("Diagramado de Tombstone");
+
+
     }
 
     @SuppressWarnings("unchecked")
@@ -47,6 +50,10 @@ public class Main extends JFrame {
 
     public static JFrame getMainFrame() {
         return mainFrame;
+    }
+
+    public static void setTitulo(String titulo) {
+        mainFrame.setTitle("Diagramado de Tombstone -" + titulo);
     }
 
     /**

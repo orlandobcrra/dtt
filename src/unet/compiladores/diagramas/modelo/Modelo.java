@@ -14,10 +14,6 @@ public class Modelo {
         listaFiguras = new ArrayList<Figura>(0);
     }
 
-    public void AnyadirFigura(Figura f) {
-        listaFiguras.add(f);
-    }
-
     public void agregarFigura(Figura f) {
         listaFiguras.add(f);
     }
@@ -29,9 +25,9 @@ public class Modelo {
     public Figura getFiguraEn(Point p) {
         for (Figura elemento : getListaFiguras()) {
             if (elemento.dentroFigura(p)) {
-                elemento.setPosicion(p); //TODO mejorar esto
+                //elemento.setPosicion(p); //TODO mejorar esto
                 return elemento;
-            }
+  }
         }
         return null;
     }

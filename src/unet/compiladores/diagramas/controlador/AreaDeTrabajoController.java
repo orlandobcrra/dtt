@@ -2,6 +2,7 @@ package unet.compiladores.diagramas.controlador;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
+import com.db4o.query.Predicate;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -81,9 +82,30 @@ public class AreaDeTrabajoController implements ActionListener {
     private void guardar() {
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), Main.DB_NAME);
         try {
-            String nombre=JOptionPane.showInputDialog(Main.getMainFrame(), "Nombre: ", "Guardado de DiagramaT",JOptionPane.QUESTION_MESSAGE);
+
+            final String nombre = JOptionPane.showInputDialog(Main.getMainFrame(), "Nombre: ", "Guardado de DiagramaT", JOptionPane.QUESTION_MESSAGE);
             modelo.setNombre(nombre);
-            db.store(modelo);
+
+            List<Modelo> modelos = db.query(new Predicate<Modelo>() {
+
+                @Override
+                public boolean match(Modelo modelo) {
+                    return modelo.getNombre().equalsIgnoreCase(nombre);
+                }
+            });
+
+            if (modelos.isEmpty()) {
+                db.store(modelo);
+            } else if (modelos.size() == 1) {
+                int r = JOptionPane.showConfirmDialog(Main.getMainFrame(), "¿Desea reemplazarlo?", "Modelo ya existente", JOptionPane.YES_NO_OPTION);
+                if (r == JOptionPane.YES_OPTION) {
+                    db.delete(modelos.get(0));
+                    db.store(modelo);
+                }
+            } else if (modelos.size() > 1) {
+                JOptionPane.showMessageDialog(Main.getMainFrame(), "Existen varios diagramas con este nombre.", "Error!", JOptionPane.ERROR_MESSAGE);
+
+            }
         } finally {
             db.close();
         }
@@ -93,10 +115,10 @@ public class AreaDeTrabajoController implements ActionListener {
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), Main.DB_NAME);
         try {
             List<Modelo> l = db.query(Modelo.class);
-            Object o=JOptionPane.showInputDialog(Main.getMainFrame(), "mensaje", "titulo", JOptionPane.QUESTION_MESSAGE, null, l.toArray(), null);
-            System.out.println(o);            
-            this.modelo.restaurar((Modelo)o);
+            Object o = JOptionPane.showInputDialog(Main.getMainFrame(), "mensaje", "titulo", JOptionPane.QUESTION_MESSAGE, null, l.toArray(), null);
+            this.modelo.restaurar((Modelo) o);
             lienzoController.getVista().repaint();
+            Main.setTitulo(modelo.getNombre());
         } finally {
             db.close();
         }

@@ -23,6 +23,7 @@ public class LienzoController implements MouseListener, MouseMotionListener {
     private Modelo modelo;
     private Lienzo vista;
     private Figura seleccionada;
+    private Figura unirCon;
 
     public LienzoController(Modelo modelo) {
         this.modelo = modelo;
@@ -36,6 +37,17 @@ public class LienzoController implements MouseListener, MouseMotionListener {
             Figura tmp = it.next();
             if (tmp.dentroFigura(posicion)) {
                 tmp.setSeleccionada(true);
+                return tmp;
+            }
+        }
+        return null;
+    }
+
+    public Figura intersectarFigura(Figura f) {
+        ListIterator<Figura> it = modelo.getListaFiguras().listIterator();
+        while (it.hasNext()) {
+            Figura tmp = it.next();
+            if (!tmp.equals(f) && tmp.intersectaFigura(f)) {
                 return tmp;
             }
         }
@@ -86,11 +98,38 @@ public class LienzoController implements MouseListener, MouseMotionListener {
             this.cambiarPosicion(seleccionada, ev.getPoint());
             vista.repaint();
         }
+        if (seleccionada != null) {
+            Figura f = this.intersectarFigura(seleccionada);
+            unirCon = f;
+            if (f != null) {
+                pegar(seleccionada, f);
+            }
+        }
+    }
+
+    private void pegar(Figura seleccionada, Figura f) {
+        if (f instanceof Compilador) {
+            if (seleccionada instanceof Interprete) {
+                ((Interprete) seleccionada).pegar((Compilador) f);
+            }
+        }
+    }
+
+    private void unir(Figura seleccionada, Figura f) {
+        if (f instanceof Compilador) {
+            if (seleccionada instanceof Interprete) {
+                ((Interprete) seleccionada).unir((Compilador) f);
+            }
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent ev) {
         vista.repaint();
+        if (seleccionada != null && unirCon != null) {
+            unir(seleccionada, unirCon);
+            unirCon = null;
+        }
         if (seleccionada != null) {
             seleccionada.setSeleccionada(false);
             seleccionada = null;
