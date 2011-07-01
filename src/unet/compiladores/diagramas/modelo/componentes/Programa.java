@@ -33,7 +33,8 @@ public class Programa extends Figura {
     @Override
     public void dibujar(Graphics g) {
         super.dibujar(g);
-        g.drawString(nombre, posicion.x + 20, posicion.y + 5);
+        g.drawString(nombre, posicion.x + 10, posicion.y + -10);
+        g.drawString(lenguaje, posicion.x + 10, posicion.y + 30);
     }
 
     //@Override
@@ -46,4 +47,13 @@ public class Programa extends Figura {
     public String toString() {
         return "Programa " + nombre + " " + lenguaje;
     }
+
+    public String getLenguaje() {
+        return lenguaje;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
 }
