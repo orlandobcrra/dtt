@@ -31,7 +31,9 @@ public class Compilador extends Figura {
     @Override
     public void dibujar(Graphics g) {
         super.dibujar(g);
-        g.drawString(fuente, posicion.x + 20, posicion.y + 5);
+        g.drawString(fuente, posicion.x + 5, posicion.y + 20);
+        g.drawString(objeto, posicion.x + 80, posicion.y + 20);
+        g.drawString(implementacion, posicion.x + 45, posicion.y + 70);
     }
 
     //@Override
@@ -45,4 +47,13 @@ public class Compilador extends Figura {
     public String toString() {
         return "compilador: " + fuente + " " + objeto + " " + implementacion;
     }
+
+    public String getFuente() {
+        return fuente;
+    }
+
+    public String getImplementacion() {
+        return implementacion;
+    }
+    
 }

@@ -18,7 +18,7 @@ public class Maquina extends Figura {
         poligono.addPoint(0, 0);
         poligono.addPoint(40, 0);
         poligono.addPoint(40, 40);
-        poligono.addPoint(80, 80);
+        poligono.addPoint(20, 70);
         poligono.addPoint(0, 40);
         setPosicion(new Point(100, 100));
     }
@@ -26,7 +26,7 @@ public class Maquina extends Figura {
     @Override
     public void dibujar(Graphics g) {
         super.dibujar(g);
-        g.drawString(nombre, posicion.x + 20, posicion.y + 5);
+        g.drawString(nombre, posicion.x + 5, posicion.y + 25);
     }
 
     //@Override
@@ -38,4 +38,9 @@ public class Maquina extends Figura {
     public String toString() {
         return "Maquina: " + nombre;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
 }

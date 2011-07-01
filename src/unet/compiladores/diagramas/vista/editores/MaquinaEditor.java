@@ -6,6 +6,7 @@
 package unet.compiladores.diagramas.vista.editores;
 
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 import unet.compiladores.diagramas.Main;
 import unet.compiladores.diagramas.modelo.componentes.Figura;
 import unet.compiladores.diagramas.modelo.componentes.Maquina;
@@ -25,6 +26,7 @@ public class MaquinaEditor extends javax.swing.JDialog {
     public MaquinaEditor(Maquina figuraModelo) {
         super(Main.getMainFrame(), true);
         initComponents();
+        this.nombre.setText(figuraModelo.getNombre());
         this.figuraModelo = figuraModelo;
         this.setLocation(
                 (Main.getMainFrame().getSize().width - this.getSize().width) / 2 + Main.getMainFrame().getLocation().x,
@@ -87,9 +89,17 @@ public class MaquinaEditor extends javax.swing.JDialog {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        figuraModelo.setDatos(nombre.getText());
-        this.setVisible(false);
-        this.dispose();
+        if(this.nombre.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(Main.getMainFrame(), "Algunos campos estan vacios", "Informacion", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            figuraModelo.setDatos(nombre.getText());
+            this.setVisible(false);
+            this.dispose();
+        }    
+        
 }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

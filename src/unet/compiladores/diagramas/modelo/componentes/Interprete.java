@@ -19,15 +19,15 @@ public class Interprete extends Figura {
         poligono.addPoint(0, 0);
         poligono.addPoint(40, 0);
         poligono.addPoint(40, 80);
-        //poligono.addPoint(20, 100);
         poligono.addPoint(0, 80);
     }
 
     @Override
     public void dibujar(Graphics g) {
         super.dibujar(g);
-        // g.drawString(l, posicion.x+20,posicion.y+5);
-
+         g.drawString(l, posicion.x+5,posicion.y+15);
+         g.drawString(m, posicion.x+5,posicion.y+65);
+         
     }
 
     //@Override
@@ -52,4 +52,14 @@ public class Interprete extends Figura {
         c.x.add(this);
         System.out.println("unido");
     }
-}
+
+            public String getL() {
+        return l;
+    }
+
+    public String getM() {
+        return m;
+    }
+    
+        }
+
