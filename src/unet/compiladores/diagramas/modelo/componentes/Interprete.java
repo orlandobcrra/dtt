@@ -25,9 +25,9 @@ public class Interprete extends Figura {
     @Override
     public void dibujar(Graphics g) {
         super.dibujar(g);
-         g.drawString(l, posicion.x+5,posicion.y+15);
-         g.drawString(m, posicion.x+5,posicion.y+65);
-         
+        g.drawString(l, posicion.x + 5, posicion.y + 15);
+        g.drawString(m, posicion.x + 5, posicion.y + 65);
+
     }
 
     //@Override
@@ -42,24 +42,22 @@ public class Interprete extends Figura {
     }
 
     public void pegar(Compilador c) {
-        Point px=new Point(c.posicion.x, c.posicion.y);
-        px.x+=40;
-        px.y+=80;
-       this.setPosicion(px);
+        Point px = new Point(c.posicion.x, c.posicion.y);
+        px.x += 40;
+        px.y += 80;
+        this.setPosicion(px);
     }
-    
-    public void unir(Compilador c){
+
+    public void unir(Compilador c) {
         c.x.add(this);
         System.out.println("unido");
     }
 
-            public String getL() {
+    public String getL() {
         return l;
     }
 
     public String getM() {
         return m;
     }
-    
-        }
-
+}
