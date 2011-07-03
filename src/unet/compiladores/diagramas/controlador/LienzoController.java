@@ -5,6 +5,7 @@ import javax.swing.SwingUtilities;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import javax.swing.JFrame;
 import unet.compiladores.diagramas.modelo.componentes.Compilador;
 import unet.compiladores.diagramas.modelo.componentes.Figura;
 import unet.compiladores.diagramas.modelo.componentes.Interprete;
@@ -26,9 +27,11 @@ public class LienzoController implements MouseListener, MouseMotionListener {
     private Point desplazamiento;
     private boolean moverUnidos;
     private boolean figuraPegada;
+    private JFrame owner;
 
-    public LienzoController(Modelo modelo) {
+    public LienzoController(Modelo modelo, JFrame owner) {
         this.modelo = modelo;
+        this.owner = owner;
         this.vista = new Lienzo(modelo, this);
     }
 
@@ -121,7 +124,7 @@ public class LienzoController implements MouseListener, MouseMotionListener {
     }
 
     private void unir(Figura seleccionada, Figura f) {
-        if(seleccionada!=null && f!=null){
+        if (seleccionada != null && f != null) {
             seleccionada.unir(f);
         }
     }
@@ -144,13 +147,13 @@ public class LienzoController implements MouseListener, MouseMotionListener {
         if (ev.getClickCount() == 2) {
             Figura f = this.getFiguraEnPunto(ev.getPoint());
             if (f instanceof Compilador) {
-                new CompiladorEditor((Compilador) f);
+                new CompiladorEditor((Compilador) f, owner);
             } else if (f instanceof Programa) {
-                new ProgramaEditor((Programa) f);
+                new ProgramaEditor((Programa) f, owner);
             } else if (f instanceof Interprete) {
-                new InterpreteEditor((Interprete) f);
+                new InterpreteEditor((Interprete) f, owner);
             } else if (f instanceof Maquina) {
-                new MaquinaEditor((Maquina) f);
+                new MaquinaEditor((Maquina) f, owner);
             }
             vista.repaint();
         }

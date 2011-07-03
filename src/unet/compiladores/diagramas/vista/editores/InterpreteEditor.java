@@ -1,8 +1,8 @@
 package unet.compiladores.diagramas.vista.editores;
 
 import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import unet.compiladores.diagramas.Main;
 import unet.compiladores.diagramas.modelo.componentes.Figura;
 import unet.compiladores.diagramas.modelo.componentes.Interprete;
 
@@ -13,20 +13,22 @@ import unet.compiladores.diagramas.modelo.componentes.Interprete;
 public class InterpreteEditor extends javax.swing.JDialog {
 
     private Interprete figuraModelo;
+    private JFrame owner;
 
-    public InterpreteEditor() {
-        this(new Interprete());
+    public InterpreteEditor(JFrame owner) {
+        this(new Interprete(), owner);
     }
 
-    public InterpreteEditor(Interprete figuraModelo) {
-        super(Main.getMainFrame(), true);
+    public InterpreteEditor(Interprete figuraModelo, JFrame owner) {
+        super(owner, true);
         initComponents();
+        this.owner = owner;
         this.l.setText(figuraModelo.getL());
         this.m.setText(figuraModelo.getM());
         this.figuraModelo = figuraModelo;
         this.setLocation(
-                (Main.getMainFrame().getSize().width - this.getSize().width) / 2 + Main.getMainFrame().getLocation().x,
-                (Main.getMainFrame().getSize().height - this.getSize().height) / 2 + Main.getMainFrame().getLocation().y);
+                (owner.getSize().width - this.getSize().width) / 2 + owner.getLocation().x,
+                (owner.getSize().height - this.getSize().height) / 2 + owner.getLocation().y);
         this.setVisible(true);
     }
 
@@ -93,17 +95,14 @@ public class InterpreteEditor extends javax.swing.JDialog {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        if(this.l.getText().isEmpty() || this.m.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(Main.getMainFrame(), "Algunos campos estan vacios", "Informacion", JOptionPane.WARNING_MESSAGE);
-        }
-        else
-        {
+
+        if (this.l.getText().isEmpty() || this.m.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(owner, "Algunos campos estan vacios", "Informacion", JOptionPane.WARNING_MESSAGE);
+        } else {
             figuraModelo.setDatos(l.getText(), m.getText());
             this.setVisible(false);
             this.dispose();
-        }    
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

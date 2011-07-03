@@ -22,7 +22,7 @@ public class Maquina extends Figura {
         poligono.addPoint(0, TAM);
         posicionar(new Point(100, 100), false);
     }
-
+    
     @Override
     public void dibujar(Graphics g) {
         super.dibujar(g);

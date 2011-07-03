@@ -6,8 +6,8 @@
 package unet.compiladores.diagramas.vista.editores;
 
 import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import unet.compiladores.diagramas.Main;
 import unet.compiladores.diagramas.modelo.componentes.Figura;
 import unet.compiladores.diagramas.modelo.componentes.Maquina;
 
@@ -18,19 +18,21 @@ import unet.compiladores.diagramas.modelo.componentes.Maquina;
 public class MaquinaEditor extends javax.swing.JDialog {
 
     private Maquina figuraModelo;
-
-    public MaquinaEditor() {
-        this(new Maquina());
+    private JFrame owner;
+    
+    public MaquinaEditor(JFrame owner) {
+        this(new Maquina(),owner);
     }
 
-    public MaquinaEditor(Maquina figuraModelo) {
-        super(Main.getMainFrame(), true);
+    public MaquinaEditor(Maquina figuraModelo,JFrame owner) {
+        super(owner, true);
         initComponents();
+        this.owner=owner;
         this.nombre.setText(figuraModelo.getNombre());
         this.figuraModelo = figuraModelo;
         this.setLocation(
-                (Main.getMainFrame().getSize().width - this.getSize().width) / 2 + Main.getMainFrame().getLocation().x,
-                (Main.getMainFrame().getSize().height - this.getSize().height) / 2 + Main.getMainFrame().getLocation().y);
+                (owner.getSize().width - this.getSize().width) / 2 + owner.getLocation().x,
+                (owner.getSize().height - this.getSize().height) / 2 + owner.getLocation().y);
         this.setVisible(true);
     }
 
@@ -91,7 +93,7 @@ public class MaquinaEditor extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(this.nombre.getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(Main.getMainFrame(), "Algunos campos estan vacios", "Informacion", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(owner, "Algunos campos estan vacios", "Informacion", JOptionPane.WARNING_MESSAGE);
         }
         else
         {

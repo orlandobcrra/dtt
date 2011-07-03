@@ -3,7 +3,6 @@ package unet.compiladores.diagramas.modelo.componentes;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.Rectangle;
 import javax.swing.SwingUtilities;
 
 /**
@@ -23,7 +22,7 @@ public class Interprete extends Figura {
         poligono.addPoint(TAM, TAM * 2);
         poligono.addPoint(0, TAM * 2);
     }
-
+    
     @Override
     public void dibujar(Graphics g) {
         super.dibujar(g);
@@ -48,8 +47,8 @@ public class Interprete extends Figura {
     public boolean pegar(Compilador c) {
         if (c.unidos[1] == null) {
             Point px = new Point(c.posicion.x, c.posicion.y);
-            px.x += 40;
-            px.y += 80;
+            px.x += TAM;
+            px.y += TAM*2;
             this.posicionar(px, false);
             return true;
         }

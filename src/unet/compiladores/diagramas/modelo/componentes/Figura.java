@@ -15,7 +15,7 @@ public abstract class Figura {
     protected Figura[] unidos = new Figura[4];
     //
     protected boolean yaSeMovio;
-    protected static int TAM=40;
+    public static int TAM = 40;
 
     public Polygon getPoligono() {
         return poligono;
