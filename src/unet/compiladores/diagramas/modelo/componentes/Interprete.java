@@ -3,6 +3,8 @@ package unet.compiladores.diagramas.modelo.componentes;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.Rectangle;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -17,17 +19,19 @@ public class Interprete extends Figura {
         posicion = new Point(0, 0);
         poligono = new Polygon();
         poligono.addPoint(0, 0);
-        poligono.addPoint(40, 0);
-        poligono.addPoint(40, 80);
-        poligono.addPoint(0, 80);
+        poligono.addPoint(TAM, 0);
+        poligono.addPoint(TAM, TAM * 2);
+        poligono.addPoint(0, TAM * 2);
     }
 
     @Override
     public void dibujar(Graphics g) {
         super.dibujar(g);
-        g.drawString(l, posicion.x + 5, posicion.y + 15);
-        g.drawString(m, posicion.x + 5, posicion.y + 65);
-
+        int ancho = 0;
+        ancho = SwingUtilities.computeStringWidth(g.getFontMetrics(), l);
+        g.drawString(l, posicion.x + (TAM - ancho) / 2, posicion.y + 25);
+        ancho = SwingUtilities.computeStringWidth(g.getFontMetrics(), m);
+        g.drawString(m, posicion.x + (TAM - ancho) / 2, posicion.y + 65);
     }
 
     //@Override
@@ -52,10 +56,11 @@ public class Interprete extends Figura {
         return false;
     }
 
-    public void unir(Compilador c) {
-        if (c.unidos[1] == null) {
-            unidos[0]=c;
-            c.unidos[1] = this;
+    @Override
+    public void unir(Figura f) {
+        if (f instanceof Compilador && f.unidos[1] == null) {
+            unidos[0] = f;
+            f.unidos[1] = this;
         }
     }
 

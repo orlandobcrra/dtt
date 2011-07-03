@@ -17,16 +17,16 @@ public class Programa extends Figura {
         posicion = new Point(0, 0);
         poligono = new Polygon();
         poligono.addPoint(0, 0);
-        poligono.addPoint(-10, -10);
-        poligono.addPoint(-10, -20);
-        poligono.addPoint(0, -30);
-        poligono.addPoint(20, -35);
-        poligono.addPoint(40, -30);
-        poligono.addPoint(50, -20);
-        poligono.addPoint(50, -10);
-        poligono.addPoint(40, 0);
-        poligono.addPoint(40, 40);
-        poligono.addPoint(0, 40);
+        poligono.addPoint(-TAM / 4, -TAM / 4);
+        poligono.addPoint(-TAM / 4, -TAM / 2);
+        poligono.addPoint(0, (int) (-TAM * 0.75));
+        poligono.addPoint(TAM / 2, (int) (-TAM * 0.875));
+        poligono.addPoint(TAM, -(int) (-TAM * 0.75));
+        poligono.addPoint((int) (TAM * 1.25), -TAM / 2);
+        poligono.addPoint((int) (TAM * 1.25), -TAM / 4);
+        poligono.addPoint(TAM, 0);
+        poligono.addPoint(TAM, TAM);
+        poligono.addPoint(0, TAM);
         posicionar(new Point(100, 100), false);
     }
 
@@ -54,5 +54,9 @@ public class Programa extends Figura {
 
     public String getNombre() {
         return nombre;
+    }
+
+    @Override
+    public void unir(Figura f) {
     }
 }

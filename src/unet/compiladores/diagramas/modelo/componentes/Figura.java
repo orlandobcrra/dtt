@@ -15,6 +15,7 @@ public abstract class Figura {
     protected Figura[] unidos = new Figura[4];
     //
     protected boolean yaSeMovio;
+    protected static int TAM=40;
 
     public Polygon getPoligono() {
         return poligono;
@@ -82,6 +83,8 @@ public abstract class Figura {
         }
         Arrays.fill(unidos, null);
     }
+
+    public abstract void unir(Figura c);
 
     public void dibujar(Graphics g) {
         g.setColor(Color.BLUE);

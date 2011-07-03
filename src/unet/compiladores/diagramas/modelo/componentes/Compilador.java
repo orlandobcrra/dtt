@@ -3,7 +3,6 @@ package unet.compiladores.diagramas.modelo.componentes;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.util.Arrays;
 
 /**
  *
@@ -19,13 +18,13 @@ public class Compilador extends Figura {
         posicion = new Point(0, 0);
         poligono = new Polygon();
         poligono.addPoint(0, 0);
-        poligono.addPoint(120, 0);
-        poligono.addPoint(120, 40);
-        poligono.addPoint(80, 40);
-        poligono.addPoint(80, 80);
-        poligono.addPoint(40, 80);
-        poligono.addPoint(40, 40);
-        poligono.addPoint(0, 40);
+        poligono.addPoint(TAM * 3, 0);
+        poligono.addPoint(TAM * 3, TAM);
+        poligono.addPoint(TAM * 2, TAM);
+        poligono.addPoint(TAM * 2, TAM * 2);
+        poligono.addPoint(TAM, TAM * 2);
+        poligono.addPoint(TAM, TAM);
+        poligono.addPoint(0, TAM);
         posicionar(new Point(100, 100), false);
     }
 
@@ -55,5 +54,9 @@ public class Compilador extends Figura {
 
     public String getImplementacion() {
         return implementacion;
+    }
+
+    @Override
+    public void unir(Figura f) {
     }
 }

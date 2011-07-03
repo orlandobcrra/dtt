@@ -16,10 +16,10 @@ public class Maquina extends Figura {
         posicion = new Point(0, 0);
         poligono = new Polygon();
         poligono.addPoint(0, 0);
-        poligono.addPoint(40, 0);
-        poligono.addPoint(40, 40);
-        poligono.addPoint(20, 70);
-        poligono.addPoint(0, 40);
+        poligono.addPoint(TAM, 0);
+        poligono.addPoint(TAM, TAM);
+        poligono.addPoint(TAM/2, TAM);
+        poligono.addPoint(0, TAM);
         posicionar(new Point(100, 100), false);
     }
 
@@ -41,5 +41,9 @@ public class Maquina extends Figura {
 
     public String getNombre() {
         return nombre;
+    }
+
+    @Override
+    public void unir(Figura f) {
     }
 }

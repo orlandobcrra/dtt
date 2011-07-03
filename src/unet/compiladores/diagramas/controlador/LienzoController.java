@@ -121,24 +121,20 @@ public class LienzoController implements MouseListener, MouseMotionListener {
     }
 
     private void unir(Figura seleccionada, Figura f) {
-        if (f instanceof Compilador) {
-            if (seleccionada instanceof Interprete) {
-                ((Interprete) seleccionada).unir((Compilador) f);
-            }
+        if(seleccionada!=null && f!=null){
+            seleccionada.unir(f);
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent ev) {
         vista.repaint();
-        if (seleccionada != null && unirCon != null) {
-            unir(seleccionada, unirCon);
-            unirCon = null;
-        }
         if (seleccionada != null) {
+            unir(seleccionada, unirCon);
             seleccionada.setSeleccionada(false);
             seleccionada.setYaSeMovio();
             seleccionada = null;
+            unirCon = null;
         }
         figuraPegada = false;
     }
