@@ -22,12 +22,20 @@ public class Modelo {
         listaFiguras.remove(f);
     }
 
-    public Figura getFiguraEn(Point p) {
-        for (Figura elemento : getListaFiguras()) {
-            if (elemento.dentroFigura(p)) {
-                //elemento.setPosicion(p); //TODO mejorar esto
-                return elemento;
-  }
+    public Figura getFiguraEnPunto(Point p, Figura omitir) {
+        for (Figura figura : getListaFiguras()) {
+            if (figura.contienePunto(p) && !figura.equals(omitir)) {
+                return figura;
+            }
+        }
+        return null;
+    }
+
+    public Figura intersectarFigura(Figura f) {
+        for (Figura figura : listaFiguras) {
+            if (!figura.equals(f) && figura.intersectaFigura(f)) {
+                return figura;
+            }
         }
         return null;
     }

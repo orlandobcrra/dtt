@@ -27,7 +27,7 @@ public class Programa extends Figura {
         poligono.addPoint(40, 0);
         poligono.addPoint(40, 40);
         poligono.addPoint(0, 40);
-        setPosicion(new Point(100, 100));
+        posicionar(new Point(100, 100), false);
     }
 
     @Override
@@ -55,5 +55,4 @@ public class Programa extends Figura {
     public String getNombre() {
         return nombre;
     }
-    
 }

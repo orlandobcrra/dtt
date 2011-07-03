@@ -3,6 +3,7 @@ package unet.compiladores.diagramas.modelo.componentes;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.util.Arrays;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Compilador extends Figura {
         poligono.addPoint(40, 80);
         poligono.addPoint(40, 40);
         poligono.addPoint(0, 40);
-        setPosicion(new Point(100, 100));
+        posicionar(new Point(100, 100), false);
     }
 
     @Override
@@ -55,5 +56,4 @@ public class Compilador extends Figura {
     public String getImplementacion() {
         return implementacion;
     }
-    
 }

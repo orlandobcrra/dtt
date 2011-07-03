@@ -41,16 +41,22 @@ public class Interprete extends Figura {
         return "Interprete " + l + " " + m;
     }
 
-    public void pegar(Compilador c) {
-        Point px = new Point(c.posicion.x, c.posicion.y);
-        px.x += 40;
-        px.y += 80;
-        this.setPosicion(px);
+    public boolean pegar(Compilador c) {
+        if (c.unidos[1] == null) {
+            Point px = new Point(c.posicion.x, c.posicion.y);
+            px.x += 40;
+            px.y += 80;
+            this.posicionar(px, false);
+            return true;
+        }
+        return false;
     }
 
     public void unir(Compilador c) {
-        c.x.add(this);
-        System.out.println("unido");
+        if (c.unidos[1] == null) {
+            unidos[0]=c;
+            c.unidos[1] = this;
+        }
     }
 
     public String getL() {

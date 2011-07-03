@@ -5,7 +5,6 @@ import javax.swing.SwingUtilities;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.ListIterator;
 import unet.compiladores.diagramas.modelo.componentes.Compilador;
 import unet.compiladores.diagramas.modelo.componentes.Figura;
 import unet.compiladores.diagramas.modelo.componentes.Interprete;
@@ -24,38 +23,21 @@ public class LienzoController implements MouseListener, MouseMotionListener {
     private Lienzo vista;
     private Figura seleccionada;
     private Figura unirCon;
+    private Point desplazamiento;
+    private boolean moverUnidos;
+    private boolean figuraPegada;
 
     public LienzoController(Modelo modelo) {
         this.modelo = modelo;
         this.vista = new Lienzo(modelo, this);
-        seleccionada = null;
     }
 
-    public Figura obtenerFigura(Point posicion) {
-        ListIterator<Figura> it = modelo.getListaFiguras().listIterator();
-        while (it.hasNext()) {
-            Figura tmp = it.next();
-            if (tmp.dentroFigura(posicion)) {
-                tmp.setSeleccionada(true);
-                return tmp;
-            }
-        }
-        return null;
+    public void moverFigura(Figura f, int x, int y, boolean moverUnidos) {
+        f.mover(x, y, moverUnidos);
     }
 
-    public Figura intersectarFigura(Figura f) {
-        ListIterator<Figura> it = modelo.getListaFiguras().listIterator();
-        while (it.hasNext()) {
-            Figura tmp = it.next();
-            if (!tmp.equals(f) && tmp.intersectaFigura(f)) {
-                return tmp;
-            }
-        }
-        return null;
-    }
-
-    public void cambiarPosicion(Figura f, Point p) {
-        f.setPosicion(p);
+    public void posicionarFigura(Figura f, Point p, boolean moverUnidos) {
+        f.posicionar(p, moverUnidos);
     }
 
     public void agregarFigura(Figura f) {
@@ -66,8 +48,16 @@ public class LienzoController implements MouseListener, MouseMotionListener {
         modelo.eliminarFigura(f);
     }
 
-    public Figura getFiguraEn(Point p) {
-        return modelo.getFiguraEn(p);
+    public Figura getFiguraEnPunto(Point p) {
+        return modelo.getFiguraEnPunto(p, null);
+    }
+
+    public Figura getFiguraEnPunto(Point p, Figura omitir) {
+        return modelo.getFiguraEnPunto(p, omitir);
+    }
+
+    public Figura intersectarFigura(Figura f) {
+        return modelo.intersectarFigura(f);
     }
 
     public Lienzo getVista() {
@@ -76,43 +66,58 @@ public class LienzoController implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent ev) {
-        if (SwingUtilities.isLeftMouseButton(ev)) { 			// Click boton izquierdo selecciona una figura
-            seleccionada = this.getFiguraEn(ev.getPoint());
-            if (seleccionada != null) {
-                seleccionada.setSeleccionada(true);
+        seleccionada = this.getFiguraEnPunto(ev.getPoint());
+        if (seleccionada != null) {
+            seleccionada.setSeleccionada(true);
+            desplazamiento = ev.getPoint();
+            if (SwingUtilities.isLeftMouseButton(ev)) {			// Click boton izquierdo selecciona una figura
+                moverUnidos = true;
+            } else if (SwingUtilities.isRightMouseButton(ev)) {		// Click boton derecho selecciona figura agrupada 
+                moverUnidos = false;
+                seleccionada.separar();
+            } else if (SwingUtilities.isMiddleMouseButton(ev)) {        // Click boton central para eliminar figura
+                this.eliminarFigura(seleccionada);
+                seleccionada = null;
+                desplazamiento = null;
             }
-        } else if (SwingUtilities.isRightMouseButton(ev)) {		// Click boton derecho selecciona figura agrupada 
-            //this.anyadirFigura(new Cuadrado(ev.getPoint(),40));			
-        } else if (SwingUtilities.isMiddleMouseButton(ev)) {            // Click boton central para eliminar figura
-            Figura f = this.getFiguraEn(ev.getPoint());
-            if (f != null) {
-                this.eliminarFigura(f);
-            }
+            vista.repaint();
         }
-        vista.repaint();
     }
 
     @Override
     public void mouseDragged(MouseEvent ev) {
         if (seleccionada != null) {
-            this.cambiarPosicion(seleccionada, ev.getPoint());
-            vista.repaint();
-        }
-        if (seleccionada != null) {
-            Figura f = this.intersectarFigura(seleccionada);
-            unirCon = f;
-            if (f != null) {
-                pegar(seleccionada, f);
+            if (moverUnidos) {
+                unirCon = this.getFiguraEnPunto(ev.getPoint(), seleccionada);
+                if (unirCon != null) {
+                    if (pegar(seleccionada, unirCon)) {
+                        figuraPegada = true;
+                        vista.repaint();
+                        return;
+                    }
+                }
+            }
+            if (desplazamiento != null) {
+                if (!figuraPegada) {
+                    this.moverFigura(seleccionada, ev.getPoint().x - desplazamiento.x, ev.getPoint().y - desplazamiento.y, moverUnidos);
+                } else {
+                    this.posicionarFigura(seleccionada, ev.getPoint(), moverUnidos);
+                    figuraPegada = false;
+                }
+                seleccionada.setYaSeMovio();
+                desplazamiento = ev.getPoint();
+                vista.repaint();
             }
         }
     }
 
-    private void pegar(Figura seleccionada, Figura f) {
+    private boolean pegar(Figura seleccionada, Figura f) {
         if (f instanceof Compilador) {
             if (seleccionada instanceof Interprete) {
-                ((Interprete) seleccionada).pegar((Compilador) f);
+                return ((Interprete) seleccionada).pegar((Compilador) f);
             }
         }
+        return false;
     }
 
     private void unir(Figura seleccionada, Figura f) {
@@ -132,14 +137,16 @@ public class LienzoController implements MouseListener, MouseMotionListener {
         }
         if (seleccionada != null) {
             seleccionada.setSeleccionada(false);
+            seleccionada.setYaSeMovio();
             seleccionada = null;
         }
+        figuraPegada = false;
     }
 
     @Override
     public void mouseClicked(MouseEvent ev) {
         if (ev.getClickCount() == 2) {
-            Figura f = this.getFiguraEn(ev.getPoint());
+            Figura f = this.getFiguraEnPunto(ev.getPoint());
             if (f instanceof Compilador) {
                 new CompiladorEditor((Compilador) f);
             } else if (f instanceof Programa) {

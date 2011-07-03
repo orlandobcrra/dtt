@@ -4,22 +4,83 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
 
 public abstract class Figura {
 
     protected Polygon poligono;
     protected Point posicion;
     protected boolean seleccionada;
-    public Set<Figura> x = new HashSet<Figura>(0);
+    // 0 = arriba . 1 = abajo . 2 = derecha . 3 = izquierda
+    protected Figura[] unidos = new Figura[4];
+    //
+    protected boolean yaSeMovio;
 
-    public boolean dentroFigura(Point p) {
+    public Polygon getPoligono() {
+        return poligono;
+    }
+
+    public void setSeleccionada(boolean seleccionada) {
+        this.seleccionada = seleccionada;
+    }
+
+    public boolean contienePunto(Point p) {
         return poligono.contains(p);
     }
 
     public boolean intersectaFigura(Figura f) {
         return poligono.getBounds2D().intersects(f.getPoligono().getBounds2D());
+    }
+
+    public void mover(int x, int y, boolean moverUnidos) {
+        poligono.translate(x, y);
+        posicion.translate(x, y);
+        this.yaSeMovio = true;
+        if (moverUnidos) {
+            for (Figura f : unidos) {
+                if (f != null && !f.yaSeMovio) {
+                    f.mover(x, y, moverUnidos);
+                }
+            }
+        }
+    }
+
+    public void posicionar(Point posicionNueva, boolean moverUnidos) {
+        poligono.translate(posicionNueva.x - posicion.x, posicionNueva.y - posicion.y);
+        posicion = posicionNueva;
+        this.yaSeMovio = true;
+//        if (moverUnidos) {
+//            for (Figura f : unidos) {
+//                f.mover(x, y, moverUnidos);
+//            }
+//        }
+    }
+
+    public void setYaSeMovio() {
+        this.yaSeMovio = false;
+        for (Figura f : unidos) {
+            if (f != null && f.yaSeMovio) {
+                f.yaSeMovio = false;
+            }
+        }
+    }
+
+    private void quitar(Figura quitar) {
+        for (int i = 0; i < unidos.length; i++) {
+            Figura figura = unidos[i];
+            if (quitar.equals(figura)) {
+                unidos[i] = null;
+            }
+        }
+    }
+
+    public final void separar() {
+        for (Figura figura : unidos) {
+            if (figura != null) {
+                figura.quitar(this);
+            }
+        }
+        Arrays.fill(unidos, null);
     }
 
     public void dibujar(Graphics g) {
@@ -32,22 +93,5 @@ public abstract class Figura {
         }
         g.drawPolygon(poligono);
         g.setColor(Color.WHITE);
-    }
-
-    public void setSeleccionada(boolean seleccionada) {
-        this.seleccionada = seleccionada;
-    }
-
-    public void setPosicion(Point posicionNueva) {
-        poligono.translate(posicionNueva.x - posicion.x, posicionNueva.y - posicion.y);
-        posicion = posicionNueva;
-        for (Figura figura : x) {
-            System.out.println("xxx");
-            figura.setPosicion(posicionNueva);
-        }
-    }
-
-    public Polygon getPoligono() {
-        return poligono;
     }
 }

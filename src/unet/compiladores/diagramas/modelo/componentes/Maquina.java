@@ -20,7 +20,7 @@ public class Maquina extends Figura {
         poligono.addPoint(40, 40);
         poligono.addPoint(20, 70);
         poligono.addPoint(0, 40);
-        setPosicion(new Point(100, 100));
+        posicionar(new Point(100, 100), false);
     }
 
     @Override
@@ -42,5 +42,4 @@ public class Maquina extends Figura {
     public String getNombre() {
         return nombre;
     }
-    
 }

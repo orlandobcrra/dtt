@@ -24,7 +24,7 @@ public class Main extends JFrame {
         mainFrame = this;
         initComponents();
         Dimension fullscreen = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension ventana = new Dimension(fullscreen.width - fullscreen.width / 10, fullscreen.height - fullscreen.height / 10);
+        Dimension ventana = new Dimension(fullscreen.width - fullscreen.width / 2, fullscreen.height - fullscreen.height / 2);
         this.setSize(ventana);
         this.setLocation((fullscreen.width - ventana.width) / 2, (fullscreen.height - ventana.height) / 2);
 
