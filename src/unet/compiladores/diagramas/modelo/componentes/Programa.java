@@ -1,6 +1,6 @@
 package unet.compiladores.diagramas.modelo.componentes;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 
@@ -10,11 +10,15 @@ import java.awt.Polygon;
  */
 public class Programa extends Figura {
 
-    private String nombre;
-    private String lenguaje;
+    private String nombre = "";
+    private String lenguaje = "";
 
-    public Programa() {
-        posicion = new Point(0, 0);
+    public Programa(int TAM) {
+        this(new Point(0, 0), TAM);
+    }
+
+    public Programa(Point posicion, int TAM) {
+        super(TAM);
         poligono = new Polygon();
         poligono.addPoint(0, 0);
         poligono.addPoint(-TAM / 4, -TAM / 4);
@@ -27,11 +31,11 @@ public class Programa extends Figura {
         poligono.addPoint(TAM, 0);
         poligono.addPoint(TAM, TAM);
         poligono.addPoint(0, TAM);
-        posicionar(new Point(100, 100), false);
+        posicionar(posicion, false);
     }
 
     @Override
-    public void dibujar(Graphics g) {
+    public void dibujar(Graphics2D g) {
         super.dibujar(g);
         g.drawString(nombre, posicion.x + 10, posicion.y + -10);
         g.drawString(lenguaje, posicion.x + 10, posicion.y + 30);

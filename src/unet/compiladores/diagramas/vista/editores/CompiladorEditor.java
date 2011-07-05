@@ -1,7 +1,8 @@
 package unet.compiladores.diagramas.vista.editores;
 
+import java.awt.Point;
+import java.awt.Window;
 import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import unet.compiladores.diagramas.modelo.componentes.Compilador;
 import unet.compiladores.diagramas.modelo.componentes.Figura;
@@ -13,14 +14,15 @@ import unet.compiladores.diagramas.modelo.componentes.Figura;
 public class CompiladorEditor extends javax.swing.JDialog {
 
     private Compilador figuraModelo;
-    private JFrame owner;
+    private Window owner;
 
-    public CompiladorEditor(JFrame owner) {
-        this(new Compilador(), owner);
+    public CompiladorEditor(Window owner, Point init, int TAM) {
+        this(new Compilador(init, TAM), owner);
     }
 
-    public CompiladorEditor(Compilador figuraModelo, JFrame owner) {
-        super(owner, true);
+    public CompiladorEditor(Compilador figuraModelo, Window owner) {
+        super(owner);
+        super.setModal(true);
         initComponents();
         this.owner = owner;
         this.figuraModelo = figuraModelo;

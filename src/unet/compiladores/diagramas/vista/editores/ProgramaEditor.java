@@ -5,8 +5,9 @@
  */
 package unet.compiladores.diagramas.vista.editores;
 
+import java.awt.Point;
+import java.awt.Window;
 import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import unet.compiladores.diagramas.modelo.componentes.Figura;
 import unet.compiladores.diagramas.modelo.componentes.Programa;
@@ -18,14 +19,15 @@ import unet.compiladores.diagramas.modelo.componentes.Programa;
 public class ProgramaEditor extends javax.swing.JDialog {
 
     private Programa figuraModelo;
-    private JFrame owner;
+    private Window owner;
 
-    public ProgramaEditor(JFrame owner) {
-        this(new Programa(), owner);
+    public ProgramaEditor(Window owner, Point init, int TAM) {
+        this(new Programa(init, TAM), owner);
     }
 
-    public ProgramaEditor(Programa figuraModelo, JFrame owner) {
-        super(owner, true);
+    public ProgramaEditor(Programa figuraModelo, Window owner) {
+        super(owner);
+        super.setModal(true);
         initComponents();
         this.owner = owner;
         this.lenguaje.setText(figuraModelo.getLenguaje());

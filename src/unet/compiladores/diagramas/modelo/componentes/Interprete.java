@@ -1,6 +1,6 @@
 package unet.compiladores.diagramas.modelo.componentes;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import javax.swing.SwingUtilities;
@@ -11,20 +11,25 @@ import javax.swing.SwingUtilities;
  */
 public class Interprete extends Figura {
 
-    private String l;
-    private String m;
+    private String l = "";
+    private String m = "";
 
-    public Interprete() {
-        posicion = new Point(0, 0);
+    public Interprete(int TAM) {
+        this(new Point(0, 0), TAM);
+    }
+
+    public Interprete(Point posicion, int TAM) {
+        super(TAM);
         poligono = new Polygon();
         poligono.addPoint(0, 0);
         poligono.addPoint(TAM, 0);
         poligono.addPoint(TAM, TAM * 2);
         poligono.addPoint(0, TAM * 2);
+        posicionar(posicion, false);
     }
-    
+
     @Override
-    public void dibujar(Graphics g) {
+    public void dibujar(Graphics2D g) {
         super.dibujar(g);
         int ancho = 0;
         ancho = SwingUtilities.computeStringWidth(g.getFontMetrics(), l);
@@ -48,7 +53,7 @@ public class Interprete extends Figura {
         if (c.unidos[1] == null) {
             Point px = new Point(c.posicion.x, c.posicion.y);
             px.x += TAM;
-            px.y += TAM*2;
+            px.y += TAM * 2;
             this.posicionar(px, false);
             return true;
         }

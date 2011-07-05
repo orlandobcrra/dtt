@@ -1,8 +1,9 @@
 package unet.compiladores.diagramas.modelo.componentes;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
+import unet.compiladores.diagramas.modelo.Modelo;
 
 /**
  *
@@ -10,21 +11,25 @@ import java.awt.Polygon;
  */
 public class Maquina extends Figura {
 
-    private String nombre;
+    private String nombre = "";
 
-    public Maquina() {
-        posicion = new Point(0, 0);
+    public Maquina(int TAM) {
+        this(new Point(0, 0), TAM);
+    }
+
+    public Maquina(Point posicion, int TAM) {
+        super(TAM);
         poligono = new Polygon();
         poligono.addPoint(0, 0);
         poligono.addPoint(TAM, 0);
         poligono.addPoint(TAM, TAM);
-        poligono.addPoint(TAM/2, TAM);
+        poligono.addPoint(TAM / 2, TAM);
         poligono.addPoint(0, TAM);
-        posicionar(new Point(100, 100), false);
+        posicionar(posicion, false);
     }
-    
+
     @Override
-    public void dibujar(Graphics g) {
+    public void dibujar(Graphics2D g) {
         super.dibujar(g);
         g.drawString(nombre, posicion.x + 5, posicion.y + 25);
     }

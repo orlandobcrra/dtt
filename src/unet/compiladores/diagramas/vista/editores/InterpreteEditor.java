@@ -1,7 +1,8 @@
 package unet.compiladores.diagramas.vista.editores;
 
+import java.awt.Point;
+import java.awt.Window;
 import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import unet.compiladores.diagramas.modelo.componentes.Figura;
 import unet.compiladores.diagramas.modelo.componentes.Interprete;
@@ -13,14 +14,15 @@ import unet.compiladores.diagramas.modelo.componentes.Interprete;
 public class InterpreteEditor extends javax.swing.JDialog {
 
     private Interprete figuraModelo;
-    private JFrame owner;
+    private Window owner;
 
-    public InterpreteEditor(JFrame owner) {
-        this(new Interprete(), owner);
+    public InterpreteEditor(Window owner, Point init, int TAM) {
+        this(new Interprete(init, TAM), owner);
     }
 
-    public InterpreteEditor(Interprete figuraModelo, JFrame owner) {
-        super(owner, true);
+    public InterpreteEditor(Interprete figuraModelo, Window owner) {
+        super(owner);
+        super.setModal(true);
         initComponents();
         this.owner = owner;
         this.l.setText(figuraModelo.getL());
