@@ -9,6 +9,8 @@ import java.util.Arrays;
 
 public abstract class Figura {
 
+    protected Color color;
+    protected Color colorInvertido;
     protected Polygon poligono;
     protected Point posicion;
     protected boolean seleccionada;
@@ -21,6 +23,8 @@ public abstract class Figura {
     public Figura(int TAM) {
         this.TAM = TAM;
         posicion = new Point(0, 0);
+        color = Color.BLUE;
+        colorInvertido = new Color(~color.getRGB());
     }
 
     public void setSeleccionada(boolean seleccionada) {
@@ -31,10 +35,6 @@ public abstract class Figura {
         return poligono.contains(p);
     }
 
-//    public boolean intersectaFigurax(Figura f) {
-//        return poligonox.getBounds2D().intersects(f.getPoligonox().getBounds2D());
-//    }
-//    
     public void mover(int x, int y, boolean moverUnidos) {
         poligono.translate(x, y);
         posicion.translate(x, y);
@@ -49,22 +49,16 @@ public abstract class Figura {
     }
 
     public void posicionar(Point posicionNueva, boolean moverUnidos) {
-        poligono.translate(posicionNueva.x - posicion.x, posicionNueva.y - posicion.y);
-        posicion.x = posicionNueva.x;
-        posicion.y = posicionNueva.y;
-        this.yaSeMovio = true;
-//        if (moverUnidos) {
-//            for (Figura f : unidos) {
-//                f.mover(x, y, moverUnidos);
-//            }
-//        }
+        int dx = posicionNueva.x - posicion.x;
+        int dy = posicionNueva.y - posicion.y;
+        mover(dx, dy, moverUnidos);
     }
 
     public void setYaSeMovio() {
         this.yaSeMovio = false;
         for (Figura f : unidos) {
             if (f != null && f.yaSeMovio) {
-                f.yaSeMovio = false;
+                f.setYaSeMovio();
             }
         }
     }
@@ -86,20 +80,43 @@ public abstract class Figura {
         }
         Arrays.fill(unidos, null);
     }
+    
+    public abstract void centrar(Point p);
 
-    public abstract void unir(Figura c);
+    public abstract Figura unir(Figura c);
+
+    public abstract boolean pegar(Figura c);
+
+    public void setColor(Color color) {
+        this.color = color;
+        setColorInvertido(new Color(~color.getRGB()));
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Color getColorInvertido() {
+        return colorInvertido;
+    }
+
+    public void setColorInvertido(Color colorInvertido) {
+        this.colorInvertido = colorInvertido;
+    }
+
+    public int getTAM() {
+        return TAM;
+    }
 
     public void dibujar(Graphics2D g) {
-        g.setColor(Color.BLUE);
+        g.setColor(color);
         g.fillPolygon(poligono);
-        //g.fill(outline);
         if (this.seleccionada) {
             g.setColor(Color.RED);
         } else {
-            g.setColor(Color.YELLOW);
+            g.setColor(colorInvertido);
         }
         g.drawPolygon(poligono);
-        //g.draw(outline);
-        g.setColor(Color.WHITE);
+        g.setColor(colorInvertido);
     }
 }

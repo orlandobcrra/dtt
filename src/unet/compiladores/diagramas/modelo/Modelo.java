@@ -34,8 +34,8 @@ public class Modelo {
         listaFiguras.add(f);
     }
 
-    public void eliminarFigura(Figura f) {
-        listaFiguras.remove(f);
+    public boolean eliminarFigura(Figura f) {
+        return listaFiguras.remove(f);
     }
 
     public Figura getFiguraEnPunto(Point p, Figura omitir) {

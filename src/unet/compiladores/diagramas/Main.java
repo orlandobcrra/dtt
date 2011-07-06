@@ -1,5 +1,6 @@
 package unet.compiladores.diagramas;
 
+import java.awt.Color;
 import unet.compiladores.diagramas.vista.Nuevo;
 
 /**

@@ -49,23 +49,43 @@ public class Interprete extends Figura {
         return "Interprete " + l + " " + m;
     }
 
-    public boolean pegar(Compilador c) {
-        if (c.unidos[1] == null) {
-            Point px = new Point(c.posicion.x, c.posicion.y);
+    @Override
+    public boolean pegar(Figura f) {
+        if (f instanceof Compilador
+                && f.unidos[1] == null
+                && this.unidos[0] == null) {
+            Point px = new Point(f.posicion.x, f.posicion.y);
             px.x += TAM;
             px.y += TAM * 2;
-            this.posicionar(px, false);
+            this.posicionar(px, true);
+            return true;
+        }
+        if (f instanceof Maquina
+                && f.unidos[0] == null
+                && this.unidos[1] == null) {
+            Point px = new Point(f.posicion.x, f.posicion.y);
+            px.y -= TAM * 2;
+            this.posicionar(px, true);
             return true;
         }
         return false;
     }
 
     @Override
-    public void unir(Figura f) {
-        if (f instanceof Compilador && f.unidos[1] == null) {
-            unidos[0] = f;
+    public Figura unir(Figura f) {
+        if (f instanceof Compilador
+                && f.unidos[1] == null
+                && this.unidos[0] == null) {
             f.unidos[1] = this;
+            this.unidos[0] = f;
         }
+        if (f instanceof Maquina
+                && f.unidos[0] == null
+                && this.unidos[1] == null) {
+            f.unidos[0] = this;
+            this.unidos[1] = f;
+        }
+        return null;
     }
 
     public String getL() {
@@ -74,5 +94,12 @@ public class Interprete extends Figura {
 
     public String getM() {
         return m;
+    }
+
+    @Override
+    public void centrar(Point p) {
+        int dx = p.x - posicion.x - (3 * TAM / 2);
+        int dY = p.y - posicion.y - TAM;
+        //mover(dx, dY, true);
     }
 }

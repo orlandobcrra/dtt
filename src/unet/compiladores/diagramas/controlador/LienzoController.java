@@ -6,7 +6,6 @@ import javax.swing.SwingUtilities;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import unet.compiladores.diagramas.modelo.componentes.Compilador;
 import unet.compiladores.diagramas.modelo.componentes.Figura;
@@ -55,8 +54,9 @@ public class LienzoController implements MouseListener, MouseMotionListener {
         modelo.agregarFigura(f);
     }
 
-    public void eliminarFigura(Figura f) {
-        modelo.eliminarFigura(f);
+    public boolean eliminarFigura(Figura f) {
+        f.separar();
+        return modelo.eliminarFigura(f);
     }
 
     public Figura getFiguraEnPunto(Point p) {
@@ -67,9 +67,6 @@ public class LienzoController implements MouseListener, MouseMotionListener {
         return modelo.getFiguraEnPunto(p, omitir);
     }
 
-//    public Figura intersectarFigurax(Figura f) {
-//        return modelo.intersectarFigurax(f);
-//    }
     public Lienzo getVista() {
         return vista;
     }
@@ -79,16 +76,18 @@ public class LienzoController implements MouseListener, MouseMotionListener {
         seleccionada = this.getFiguraEnPunto(ev.getPoint());
         if (seleccionada != null) {
             seleccionada.setSeleccionada(true);
+            seleccionada.centrar(ev.getPoint());
             desplazamiento = ev.getPoint();
-            if (SwingUtilities.isLeftMouseButton(ev)) {			// Click boton izquierdo selecciona una figura
+            if (SwingUtilities.isLeftMouseButton(ev)) {			// Click boton izquierdo selecciona una figura y mover unidos
                 moverUnidos = true;
-            } else if (SwingUtilities.isRightMouseButton(ev)) {		// Click boton derecho selecciona figura agrupada 
+            } else if (SwingUtilities.isRightMouseButton(ev)) {		// Click boton derecho 
+                
+            } else if (SwingUtilities.isMiddleMouseButton(ev)) {        // Click boton central para selecciona figura y separar
                 moverUnidos = false;
                 seleccionada.separar();
-            } else if (SwingUtilities.isMiddleMouseButton(ev)) {        // Click boton central para eliminar figura
-                this.eliminarFigura(seleccionada);
-                seleccionada = null;
-                desplazamiento = null;
+                //this.eliminarFigura(seleccionada);
+                //seleccionada = null;
+                //desplazamiento = null;
             }
             vista.repaint();
         }
@@ -102,6 +101,7 @@ public class LienzoController implements MouseListener, MouseMotionListener {
                 if (unirCon != null) {
                     if (pegar(seleccionada, unirCon)) {
                         figuraPegada = true;
+                        seleccionada.setYaSeMovio();
                         vista.repaint();
                         return;
                     }
@@ -112,6 +112,7 @@ public class LienzoController implements MouseListener, MouseMotionListener {
                     this.moverFigura(seleccionada, ev.getPoint().x - desplazamiento.x, ev.getPoint().y - desplazamiento.y, moverUnidos);
                 } else {
                     this.posicionarFigura(seleccionada, ev.getPoint(), moverUnidos);
+                    //seleccionada.centrar(ev.getPoint());
                     figuraPegada = false;
                 }
                 seleccionada.setYaSeMovio();
@@ -122,12 +123,7 @@ public class LienzoController implements MouseListener, MouseMotionListener {
     }
 
     private boolean pegar(Figura seleccionada, Figura f) {
-        if (f instanceof Compilador) {
-            if (seleccionada instanceof Interprete) {
-                return ((Interprete) seleccionada).pegar((Compilador) f);
-            }
-        }
-        return false;
+        return seleccionada.pegar(f);
     }
 
     private void unir(Figura seleccionada, Figura f) {

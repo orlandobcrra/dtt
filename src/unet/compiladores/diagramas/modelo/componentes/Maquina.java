@@ -23,7 +23,7 @@ public class Maquina extends Figura {
         poligono.addPoint(0, 0);
         poligono.addPoint(TAM, 0);
         poligono.addPoint(TAM, TAM);
-        poligono.addPoint(TAM / 2, TAM);
+        poligono.addPoint(TAM / 2, 3 * TAM / 2);
         poligono.addPoint(0, TAM);
         posicionar(posicion, false);
     }
@@ -49,6 +49,51 @@ public class Maquina extends Figura {
     }
 
     @Override
-    public void unir(Figura f) {
+    public boolean pegar(Figura f) {
+        if (f instanceof Compilador
+                && f.unidos[1] == null
+                && this.unidos[0] == null
+                && ((Compilador)f).getImplementacion().equals(nombre)) {
+            Point px = new Point(f.posicion.x, f.posicion.y);
+            px.x += TAM;
+            px.y += TAM * 2;
+            this.posicionar(px, true);
+            return true;
+        }
+        if (f instanceof Interprete
+                && f.unidos[1] == null
+                && this.unidos[0] == null
+                && ((Interprete)f).getM().equals(nombre)) {
+            Point px = new Point(f.posicion.x, f.posicion.y);
+            px.y += TAM * 2;
+            this.posicionar(px, true);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Figura unir(Figura f) {
+        if ((f instanceof Compilador)
+                && f.unidos[1] == null
+                && this.unidos[0] == null
+                &&  ((Compilador)f).getImplementacion().equals(nombre)) {
+            f.unidos[1] = this;
+            this.unidos[0] = f;
+        }
+        if ((f instanceof Interprete)
+                && f.unidos[1] == null
+                && this.unidos[0] == null) {
+            f.unidos[1] = this;
+            this.unidos[0] = f;
+        }
+        return null;
+    }
+    
+        @Override
+    public void centrar(Point p) {
+        int dx = p.x - posicion.x - (3 * TAM / 2);
+        int dY = p.y - posicion.y - TAM;
+        //mover(dx, dY, true);
     }
 }

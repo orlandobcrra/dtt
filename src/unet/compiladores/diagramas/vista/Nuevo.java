@@ -10,8 +10,11 @@
  */
 package unet.compiladores.diagramas.vista;
 
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.JOptionPane;
 import unet.compiladores.diagramas.controlador.AreaDeTrabajoController;
 import unet.compiladores.diagramas.controlador.LienzoController;
@@ -41,6 +44,7 @@ public class Nuevo extends javax.swing.JDialog {
             this.setLocation(
                     (owner.getSize().width - this.getSize().width) / 2 + owner.getLocation().x,
                     (owner.getSize().height - this.getSize().height) / 2 + owner.getLocation().y);
+            jButton3.setVisible(false);
         }
 
         int tam = 40;
@@ -69,6 +73,7 @@ public class Nuevo extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nuevo Diagrama");
@@ -104,6 +109,13 @@ public class Nuevo extends javax.swing.JDialog {
 
         jCheckBox1.setText("Nueva Area de Trabajo");
 
+        jButton3.setText("Abrir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,8 +134,10 @@ public class Nuevo extends javax.swing.JDialog {
                             .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                         .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)))
                 .addContainerGap())
@@ -131,7 +145,7 @@ public class Nuevo extends javax.swing.JDialog {
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jButton3});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,6 +164,7 @@ public class Nuevo extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2)
+                        .addComponent(jButton3)
                         .addComponent(jButton1))
                     .addComponent(jCheckBox1))
                 .addContainerGap())
@@ -190,9 +205,29 @@ public class Nuevo extends javax.swing.JDialog {
         c.regenerar(jSlider1.getValue());
         lienzoController.getVista().repaint();
     }//GEN-LAST:event_jSlider1StateChanged
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "dataBase");
+        try {
+            List<Modelo> l = db.query(Modelo.class);
+            Modelo o = (Modelo) JOptionPane.showInputDialog(this, "mensaje", "titulo", JOptionPane.QUESTION_MESSAGE, null, l.toArray(), null);
+            if (o != null) {
+                if (modelo == null || jCheckBox1.isSelected()) {
+                    new AreaDeTrabajoController(o);
+                } else {
+                    modelo.restaurar(o);
+                }
+                this.setVisible(false);
+                this.dispose();
+            }
+        } finally {
+            db.close();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

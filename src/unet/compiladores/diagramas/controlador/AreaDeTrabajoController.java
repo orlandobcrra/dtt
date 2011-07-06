@@ -73,6 +73,15 @@ public class AreaDeTrabajoController implements ActionListener {
         } else if (e.getSource().equals(vista.editar)) {
             Figura f = lienzoController.getFiguraEnPunto(lienzoController.init);
             lienzoController.editar(f);
+        } else if (e.getSource().equals(vista.separar)) {
+            Figura f = lienzoController.getFiguraEnPunto(lienzoController.init);
+            f.separar();
+            f.mover(-f.getTAM(), -f.getTAM(), false);
+            lienzoController.getVista().repaint();
+        } else if (e.getSource().equals(vista.eliminar)) {
+            Figura f = lienzoController.getFiguraEnPunto(lienzoController.init);
+            lienzoController.eliminarFigura(f);
+            lienzoController.getVista().repaint();
         } else if (e.getSource().equals(vista.ayudaContenido)) {
             mostrarAyuda();
         } else if (e.getSource().equals(vista.acercaDe)) {
@@ -146,7 +155,6 @@ public class AreaDeTrabajoController implements ActionListener {
                         return modelo.getNombre().equalsIgnoreCase(n);
                     }
                 });
-
                 if (modelos.isEmpty()) {
                     db.store(modelo);
                 } else if (modelos.size() == 1) {
@@ -154,15 +162,6 @@ public class AreaDeTrabajoController implements ActionListener {
                     if (r == JOptionPane.YES_OPTION) {
                         db.delete(modelos.get(0));
                         db.store(modelo);
-//                    } else if (r == JOptionPane.NO_OPTION) {
-//                        nombre = JOptionPane.showInputDialog(vista, "Nombre: ", "Guardado de DiagramaT", JOptionPane.QUESTION_MESSAGE);
-//                        if (nombre.isEmpty()) {
-//                            JOptionPane.showMessageDialog(vista, "Debe ingresar el nombre del modelo", "Error", JOptionPane.ERROR_MESSAGE);
-//                            return;
-//                        } else {
-//                            modelo.setNombre(nombre);
-//                            guardar();
-//                        }
                     }
                 } else if (modelos.size() > 1) {
                     JOptionPane.showMessageDialog(vista, "Existen varios diagramas con este nombre.", "Error!", JOptionPane.ERROR_MESSAGE);

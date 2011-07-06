@@ -41,6 +41,8 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         abrir.addActionListener(controlador);
         exportar.addActionListener(controlador);
         editar.addActionListener(controlador);
+        eliminar.addActionListener(controlador);
+        separar.addActionListener(controlador);
 
         jScrollPane1.setViewportView(lienzoController.getVista());
 
@@ -48,6 +50,8 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         nombreField.setText(modelo.getNombre());
 
         jPopupMenu1.add(editar);
+        jPopupMenu1.add(separar);
+        jPopupMenu1.add(eliminar);
         jPopupMenu1.add(agregar);
 
         this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -104,6 +108,8 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         programa = new javax.swing.JMenuItem();
         interprete = new javax.swing.JMenuItem();
         editar = new javax.swing.JMenuItem();
+        eliminar = new javax.swing.JMenuItem();
+        separar = new javax.swing.JMenuItem();
         ayuda = new javax.swing.JMenu();
         ayudaContenido = new javax.swing.JMenuItem();
         acercaDe = new javax.swing.JMenuItem();
@@ -128,6 +134,9 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jLabel1.setText("Nombre:");
 
@@ -197,6 +206,12 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         editar.setText("Editar");
         agregar.add(editar);
 
+        eliminar.setText("Eliminar");
+        agregar.add(eliminar);
+
+        separar.setText("Separar");
+        agregar.add(separar);
+
         jMenuBar1.add(agregar);
 
         ayuda.setText("Ayuda");
@@ -238,6 +253,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
     public javax.swing.JMenuItem ayudaContenido;
     public javax.swing.JMenuItem compilador;
     public javax.swing.JMenuItem editar;
+    public javax.swing.JMenuItem eliminar;
     private javax.swing.JTextArea enunciadoArea;
     public javax.swing.JMenuItem exportar;
     public javax.swing.JMenuItem guardar;
@@ -253,6 +269,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
     private javax.swing.JTextField nombreField;
     public javax.swing.JMenuItem nuevo;
     public javax.swing.JMenuItem programa;
+    public javax.swing.JMenuItem separar;
     private javax.swing.ButtonGroup tipoComponente;
     // End of variables declaration//GEN-END:variables
 }

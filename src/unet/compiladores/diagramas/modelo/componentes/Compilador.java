@@ -13,6 +13,7 @@ public class Compilador extends Figura {
     private String fuente = "";
     private String objeto = "";
     private String implementacion = "";
+    private boolean aLaDerechaDelPrograma;
 
     public Compilador(int TAM) {
         this(new Point(0, 0), TAM);
@@ -73,7 +74,95 @@ public class Compilador extends Figura {
         return implementacion;
     }
 
+    public String getObjeto() {
+        return objeto;
+    }
+
     @Override
-    public void unir(Figura f) {
+    public boolean pegar(Figura p) {
+        if ((p instanceof Interprete || p instanceof Maquina)
+                && p.unidos[0] == null
+                && this.unidos[1] == null) {
+            Point px = new Point(p.posicion.x, p.posicion.y);
+            px.x -= TAM;
+            px.y -= TAM * 2;
+            this.posicionar(px, true);
+            return true;
+        }
+        if (p instanceof Programa) {
+            if (posicion.x <= p.posicion.x + (TAM / 2)) {
+                if (p.unidos[3] == null && this.unidos[2] == null) {
+                    Point px = new Point(p.posicion.x, p.posicion.y);
+                    px.x -= 3 * TAM;
+                    this.posicionar(px, true);
+                    this.aLaDerechaDelPrograma = false;
+                    return true;
+                }
+            }
+            if (posicion.x > p.posicion.x + (TAM / 2)) {
+                if (p.unidos[2] == null && this.unidos[3] == null) {
+                    Point px = new Point(p.posicion.x, p.posicion.y);
+                    px.x += TAM;
+                    this.posicionar(px, true);
+                    this.aLaDerechaDelPrograma = true;
+                    return true;
+                }
+            }
+        }
+        if (p instanceof Compilador) {
+            if (posicion.x <= p.posicion.x + (3 * TAM / 2)) {
+                if (p.unidos[3] == null && this.unidos[2] == null) {
+                    Point px = new Point(p.posicion.x, p.posicion.y);
+                    px.y -= TAM;
+                    px.x -= 2 * TAM;
+                    this.posicionar(px, true);
+                    this.aLaDerechaDelPrograma = false;
+                    return true;
+                }
+            }
+            if (posicion.x > p.posicion.x + (3 * TAM / 2)) {
+                if (p.unidos[2] == null && this.unidos[1] == null) {
+                    Point px = new Point(p.posicion.x, p.posicion.y);
+                    px.y -= TAM;
+                    px.x += 2 * TAM;
+                    this.posicionar(px, true);
+                    this.aLaDerechaDelPrograma = true;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Figura unir(Figura f) {
+        if ((f instanceof Interprete || f instanceof Maquina)
+                && f.unidos[0] == null
+                && this.unidos[1] == null) {
+            f.unidos[0] = this;
+            this.unidos[1] = f;
+        }
+        if ((f instanceof Programa || f instanceof Compilador)
+                && aLaDerechaDelPrograma
+                && f.unidos[2] == null
+                && this.unidos[3] == null) {
+            f.unidos[2] = this;
+            this.unidos[3] = f;
+        }
+        if ((f instanceof Programa || f instanceof Compilador)
+                && !aLaDerechaDelPrograma
+                && f.unidos[3] == null
+                && this.unidos[2] == null) {
+            f.unidos[3] = this;
+            this.unidos[2] = f;
+        }
+        return null;
+    }
+
+    @Override
+    public void centrar(Point p) {
+        int dx = p.x - posicion.x - (3 * TAM / 2);
+        int dY = p.y - posicion.y - TAM;
+        //mover(dx, dY, true);
     }
 }
