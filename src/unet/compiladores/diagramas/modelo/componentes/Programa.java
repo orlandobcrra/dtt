@@ -78,49 +78,13 @@ public class Programa extends Figura {
         if (f instanceof Compilador) {
             UnirFiguras.pegarProgramaCompilador((Compilador)f, this);
             
-//            if (posicion.x <= f.posicion.x + (3 * TAM / 2)) {
-//                if ((f.unidos[3] == null && this.unidos[2] == null)
-//                    && (((Compilador)f).getFuente().equals(lenguaje))){
-//                    Point px = new Point(f.posicion.x, f.posicion.y);
-//                    px.x -= TAM;
-//                    this.posicionar(px, true);
-//                    this.aLaDerechaDelPrograma = true;
-//                    return true;
-//                }
-//            }
-//            if (posicion.x > f.posicion.x + (3 * TAM / 2)) {
-//                if ((f.unidos[2] == null && this.unidos[3] == null)
-//                   && (((Compilador)f).getObjeto().equals(lenguaje))){
-//                    Point px = new Point(f.posicion.x, f.posicion.y);
-//                    px.x += 3 * TAM;
-//                    this.posicionar(px, true);
-//                    this.aLaDerechaDelPrograma = false;
-//                    return true;
-//                }
-//            }
-            
-           
         }
             if ((f instanceof Interprete)){
                 UnirFiguras.pegarProgramaInterprete((Interprete)f, this);
-//                && f.unidos[0] == null
-//                && this.unidos[1] == null)
-//                && ((Interprete)f).getL().equals(lenguaje)) {
-//            Point px = new Point(f.posicion.x, f.posicion.y);
-//            px.y -= TAM;
-//            this.posicionar(px, true);
-//            return true;
         }
             
           if ((f instanceof Maquina)){
               UnirFiguras.pegarProgramaMaquina((Maquina)f, this);
-//             && f.unidos[0] == null
-//             && this.unidos[1] == null)
-//             && ((Maquina)f).getNombre().equals(lenguaje)) {
-//          Point px = new Point(f.posicion.x, f.posicion.y);
-//          px.y -= TAM;
-//          this.posicionar(px, true);
-//          return true;
         }
         return false;
     }
