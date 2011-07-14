@@ -1,52 +1,15 @@
 package unet.compiladores.diagramas;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import javax.swing.JFrame;
-import unet.compiladores.diagramas.controlador.AreaDeTrabajoController;
-import unet.compiladores.diagramas.modelo.Modelo;
+import java.awt.Color;
+import unet.compiladores.diagramas.vista.Nuevo;
 
-/*
- * Main.java
- *
- * Created on 28/06/2011, 07:41:19 AM
- */
 /**
  *
  * @author orlandobcrra
  */
-public class Main extends JFrame {
-
-    private static JFrame mainFrame;
-    public static final String DB_NAME = "database1";
+public class Main {
 
     public Main() {
-        initComponents();
-        Dimension fullscreen = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension ventana = new Dimension(fullscreen.width - fullscreen.width / 10, fullscreen.height - fullscreen.height / 10);
-        this.setSize(ventana);
-        this.setLocation((fullscreen.width - ventana.width) / 2, (fullscreen.height - ventana.height) / 2);
-
-        Modelo modelo = new Modelo();
-        AreaDeTrabajoController controlador = new AreaDeTrabajoController(modelo);
-
-        this.getContentPane().add(controlador.getVista());
-        mainFrame = this;
-        System.out.println("linea de prueba");
-    }
-
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Diagramas T");
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    public static JFrame getMainFrame() {
-        return mainFrame;
     }
 
     /**
@@ -56,10 +19,17 @@ public class Main extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new Main().setVisible(true);
+//                Modelo modelo = new Modelo();
+//                new AreaDeTrabajoController(modelo);
+                Nuevo dialog = new Nuevo(new javax.swing.JFrame(), true, null);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
 }

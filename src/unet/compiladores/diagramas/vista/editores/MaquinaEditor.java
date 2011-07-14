@@ -5,9 +5,13 @@
  */
 package unet.compiladores.diagramas.vista.editores;
 
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Window;
 import java.awt.event.WindowEvent;
+import javax.swing.JColorChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import unet.compiladores.diagramas.Main;
 import unet.compiladores.diagramas.modelo.componentes.Figura;
 import unet.compiladores.diagramas.modelo.componentes.Maquina;
 
@@ -18,20 +22,29 @@ import unet.compiladores.diagramas.modelo.componentes.Maquina;
 public class MaquinaEditor extends javax.swing.JDialog {
 
     private Maquina figuraModelo;
+    private Window owner;
 
-    public MaquinaEditor() {
-        this(new Maquina());
+    public MaquinaEditor(JFrame owner, Point init, int TAM) {
+        this(new Maquina(init, TAM), owner);
     }
 
-    public MaquinaEditor(Maquina figuraModelo) {
-        super(Main.getMainFrame(), true);
+    public MaquinaEditor(Maquina figuraModelo, Window owner) {
+        super(owner);
+        super.setModal(true);
         initComponents();
+        this.owner = owner;
         this.nombre.setText(figuraModelo.getNombre());
         this.figuraModelo = figuraModelo;
         this.setLocation(
-                (Main.getMainFrame().getSize().width - this.getSize().width) / 2 + Main.getMainFrame().getLocation().x,
-                (Main.getMainFrame().getSize().height - this.getSize().height) / 2 + Main.getMainFrame().getLocation().y);
+                (owner.getSize().width - this.getSize().width) / 2 + owner.getLocation().x,
+                (owner.getSize().height - this.getSize().height) / 2 + owner.getLocation().y);
+
+        //para el color del boton
+        this.jButton2.setBackground(figuraModelo.getColor());
+        this.jButton2.setForeground(figuraModelo.getColorInvertido());
+        this.getRootPane().setDefaultButton(jButton1);
         this.setVisible(true);
+
     }
 
     public Figura getFigura() {
@@ -44,6 +57,7 @@ public class MaquinaEditor extends javax.swing.JDialog {
 
         nombre = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,6 +70,13 @@ public class MaquinaEditor extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setText("Color");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,7 +85,8 @@ public class MaquinaEditor extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -72,6 +94,8 @@ public class MaquinaEditor extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
@@ -89,20 +113,28 @@ public class MaquinaEditor extends javax.swing.JDialog {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(this.nombre.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(Main.getMainFrame(), "Algunos campos estan vacios", "Informacion", JOptionPane.WARNING_MESSAGE);
-        }
-        else
-        {
+        if (this.nombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(owner, "Algunos campos estan vacios", "Informacion", JOptionPane.WARNING_MESSAGE);
+        } else {
             figuraModelo.setDatos(nombre.getText());
             this.setVisible(false);
             this.dispose();
-        }    
-        
+        }
+
 }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Color c = JColorChooser.showDialog(owner, "Color", figuraModelo.getColor());
+        if (c != null) {
+            figuraModelo.setColor(c);
+            //color del boton
+            jButton2.setBackground(c);
+            jButton2.setForeground(figuraModelo.getColorInvertido());
+        }
+}//GEN-LAST:event_jButton2ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 }
