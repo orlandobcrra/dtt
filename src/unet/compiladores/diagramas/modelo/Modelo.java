@@ -7,10 +7,26 @@ import java.util.List;
 
 public class Modelo {
 
+    private int TAM;
     private String nombre;
+    private String enunciado;
     private List<Figura> listaFiguras;
 
     public Modelo() {
+        this(40, "");
+    }
+
+    public Modelo(int TAM, String nombre) {
+        this.TAM = TAM;
+        this.nombre = nombre;
+        this.enunciado = "";
+        listaFiguras = new ArrayList<Figura>(0);
+    }
+
+    public void limpiar(int TAM, String nombre) {
+        this.TAM = TAM;
+        this.nombre = nombre;
+        this.enunciado = "";
         listaFiguras = new ArrayList<Figura>(0);
     }
 
@@ -18,21 +34,23 @@ public class Modelo {
         listaFiguras.add(f);
     }
 
-    public void eliminarFigura(Figura f) {
-        listaFiguras.remove(f);
+    public boolean eliminarFigura(Figura f) {
+        return listaFiguras.remove(f);
     }
 
-    public Figura getFiguraEn(Point p) {
-        for (Figura elemento : getListaFiguras()) {
-            if (elemento.dentroFigura(p)) {
-                //elemento.setPosicion(p); //TODO mejorar esto
-                return elemento;
-  }
+    public Figura getFiguraEnPunto(Point p, Figura omitir) {
+        for (Figura figura : getListaFiguras()) {
+            if (figura.contienePunto(p) && !figura.equals(omitir)) {
+                return figura;
+            }
         }
         return null;
     }
 
     public void restaurar(Modelo m) {
+        this.nombre = m.getNombre();
+        this.enunciado = m.getEnunciado();
+        this.TAM = m.getTAM();
         this.listaFiguras = m.getListaFiguras();
     }
 
@@ -50,6 +68,22 @@ public class Modelo {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getEnunciado() {
+        return enunciado;
+    }
+
+    public void setEnunciado(String enunciado) {
+        this.enunciado = enunciado;
+    }
+
+    public int getTAM() {
+        return TAM;
+    }
+
+    public void setTAM(int TAM) {
+        this.TAM = TAM;
     }
 
     @Override

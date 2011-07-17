@@ -1,6 +1,6 @@
 package unet.compiladores.diagramas.modelo.componentes;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 
@@ -10,28 +10,33 @@ import java.awt.Polygon;
  */
 public class Programa extends Figura {
 
-    private String nombre;
-    private String lenguaje;
+    private String nombre = "";
+    private String lenguaje = "";
+    private boolean aLaDerechaDelPrograma;
 
-    public Programa() {
-        posicion = new Point(0, 0);
+    public Programa(int TAM) {
+        this(new Point(0, 0), TAM);
+    }
+
+    public Programa(Point posicion, int TAM) {
+        super(TAM);
         poligono = new Polygon();
         poligono.addPoint(0, 0);
-        poligono.addPoint(-10, -10);
-        poligono.addPoint(-10, -20);
-        poligono.addPoint(0, -30);
-        poligono.addPoint(20, -35);
-        poligono.addPoint(40, -30);
-        poligono.addPoint(50, -20);
-        poligono.addPoint(50, -10);
-        poligono.addPoint(40, 0);
-        poligono.addPoint(40, 40);
-        poligono.addPoint(0, 40);
-        setPosicion(new Point(100, 100));
+        poligono.addPoint(-TAM / 4, -TAM / 4);
+        poligono.addPoint(-TAM / 4, -TAM / 2);
+        poligono.addPoint(0, (-TAM * 3) / 4);
+        poligono.addPoint(TAM / 2, (-TAM * 7) / 8);
+        poligono.addPoint(TAM, (-TAM * 3) / 4);
+        poligono.addPoint((TAM * 5) / 4, -TAM / 2);
+        poligono.addPoint((TAM * 5) / 4, -TAM / 4);
+        poligono.addPoint(TAM, 0);
+        poligono.addPoint(TAM, TAM);
+        poligono.addPoint(0, TAM);
+        posicionar(posicion, false);
     }
 
     @Override
-    public void dibujar(Graphics g) {
+    public void dibujar(Graphics2D g) {
         super.dibujar(g);
         g.drawString(nombre, posicion.x + 10, posicion.y + -10);
         g.drawString(lenguaje, posicion.x + 10, posicion.y + 30);
@@ -55,5 +60,55 @@ public class Programa extends Figura {
     public String getNombre() {
         return nombre;
     }
-    
+
+    @Override
+    public boolean pegar(Figura f) {
+        if (f instanceof Compilador) {
+            if (posicion.x <= f.posicion.x + (3 * TAM / 2)) {
+                if (f.unidos[3] == null && this.unidos[2] == null) {
+                    Point px = new Point(f.posicion.x, f.posicion.y);
+                    px.x -= TAM;
+                    this.posicionar(px, true);
+                    this.aLaDerechaDelPrograma = true;
+                    return true;
+                }
+            }
+            if (posicion.x > f.posicion.x + (3 * TAM / 2)) {
+                if (f.unidos[2] == null && this.unidos[3] == null) {
+                    Point px = new Point(f.posicion.x, f.posicion.y);
+                    px.x += 3 * TAM;
+                    this.posicionar(px, true);
+                    this.aLaDerechaDelPrograma = false;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Figura unir(Figura f) {
+        if (f instanceof Compilador
+                && aLaDerechaDelPrograma
+                && f.unidos[3] == null
+                && this.unidos[2] == null) {
+            f.unidos[3] = this;
+            this.unidos[2] = f;
+        }
+        if (f instanceof Compilador
+                && !aLaDerechaDelPrograma
+                && f.unidos[2] == null
+                && this.unidos[3] == null) {
+            f.unidos[2] = this;
+            this.unidos[3] = f;
+        }
+        return null;
+    }
+
+    @Override
+    public void centrar(Point p) {
+        int dx = p.x - posicion.x - (3 * TAM / 2);
+        int dY = p.y - posicion.y - TAM;
+        //mover(dx, dY, true);
+    }
 }
