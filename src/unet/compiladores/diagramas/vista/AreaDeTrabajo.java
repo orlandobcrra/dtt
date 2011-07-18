@@ -152,7 +152,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)))
+                        .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,7 +165,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -189,7 +189,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
 
         jMenuBar1.add(archivo);
 
-        agregar.setText("Agragar");
+        agregar.setText("Agregar");
 
         compilador.setText("Compilador");
         agregar.add(compilador);

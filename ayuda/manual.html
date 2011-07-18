@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" title="html5doctor.com Reset Stylesheet" />
+    <!-- general stylesheet contains some default styles, you do not need this, but it helps you keep a uniform style -->
+    <link rel="stylesheet" type="text/css" href="css/general.css" media="screen" />
+     <!-- grid's will help you keep your website appealing to your users, view 52framework.com website for documentation -->
+    <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/ayuda.css" media="screen" />
+        <script src="js/jquery-1.6.2.min.js"></script><!-- this is the javascript allowing html5 to run in older browsers -->
+
+
+
+  <title>Compiladores e interpretes::Diagramas Tombstone</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+<div id="header" class="gradiente" >
+  <img src="images/logo.png" alt="logoMiTarjetaPersonal" class="logoPequeno" />
+</div>
+<div id="top" class="box_shadow gradiente">
+
+</div>
+<div id="left" >
+     <a href="help.html" ><img src="images/info_32x32.png" alt="InfBasica" />Informacion Básica</a>
+     <a href="manual.html" class="current"><img src="images/help_32x32.png" alt="DirTelf" />Manual de uso</a>
+     <a href="autores.html"><img src="images/user.png" alt="DirTelf" />Autores</a>
+</div>
+
+<div id="center">
+ <div class="contenido">
+    <h3>Manual de ayuda::Pantalla de inicio</h3>
+    <img src="images/inicio.png" alt="inicio" />
+    <p>En esta pantalla puedes realizar las siguientes opciones prosionando las botones disponibles:</p>
+   <p><strong>Aceptar:</strong> abre una nueva area de trabajo, lista para empezar a trabajar.</p>
+   <p><strong>Abrir:</strong> utiliza esta opción si deseas recuperar un trabajo anterior o realizar
+    algunos de los ejercicios que se encuentran disponibles.</p>
+   <p><strong>Cancelar:</strong>  finalizar la ejecucion de la aplicación.</p>
+
+    <h3>Manual de ayuda::Pantalla pricipal Barra de Menu</h3>
+
+    <p>Aquí disponenos de dos opciones ubicadas en la barra de menu superior:</p>
+    <img src="images/PrincipalArchivo.png" alt="archivo" />
+   <p><strong>Archivo:</strong> contamos con las siguientes opciones:</p>
+   <p><strong>1. Nuevo:</strong> permite crear una nueva area de trabajo</p>
+   <p><strong>2. Abrir:</strong> utiliza esta opción si deseas recuperar un trabajo anterior o realizar
+    algunos de los ejercicios que se encuentran disponibles.</p>
+   <p><strong>3. Guardar:</strong> te permite guardar el area de trabajo actual.</p>
+   <p><strong>4. Exportar:</strong> sirve para exportar el area de trabajo actual a una imagen.</p>
+   <br><br><br><br>
+    <img src="images/principalAyuda.png" alt="ayuda" />
+    <p><strong>Ayuda:</strong> contamos con las siguientes opciones:</p>
+   <p><strong>1. Contenido:</strong> permite ver este manual.</p>
+   <p><strong>2. Acerda de:</strong> muestra la informacion de los desarrolladores de la aplicacion.</p>
+
+
+    <h3>Manual de ayuda::Pantalla pricipal Menu de Aplicacion</h3>
+
+    <p>Pulsando boton derecho sobre el area de trabajo dispones de un menu con nuevas opciones tales como:</p>
+    <img src="images/menu1.png" alt="menu1" />
+   <p><strong>1. Editar:</strong> permite modificar las caracteristicas del elemento seleccionado.</p>
+   <p><strong>2. Separar:</strong> sirve para separar dos elementos que se encuentran juntos.</p>
+   <p><strong>3. Eliminar:</strong> elimina el elemento seleccionado.</p>
+   <p><strong>4.Agregar:</strong>despliega un submenu que permite agregar elementos tales como: compiladores, maquinas, interprestes y programas, al area de trabajo actual.</p>
+    <br><br><br>
+
+     <p>Detalle del submenu Agregar:</p>
+    <img src="images/menu2.png" alt="menu1" />
+   <p><strong>1. Compilador:</strong> agregar un compilador al area de trabajo actual.</p>
+   <p><strong>2. Maquina:</strong> agregar una maquina al area de trabajo actual.</p>
+   <p><strong>3. Programa:</strong> agregar un programa al area de trabajo actual.</p>
+   <p><strong>4. Interprete:</strong>agregar un interprete al area de trabajo actual.</p>
+
+    <h3>Manual de ayuda::Otras consideraciones</h3>
+    <p>1. El programa une los componentes acercardolos unos a los otros, solo se uniran si la seleccio que se esta haciendo es la adecuada.</p>
+
+
+
+ </div>  <!-- fin contenido -->
+</div>
+<div id="footer" class="gradiente">
+ <div class="row">
+    <div class=" col_16 col">
+     <p class="align_center" style="color: #A0A0A0;">mitarjetapersonal.com.ve &copy;  Todos los derechos reservados 2010-2012</p>
+    </div>
+
+ </div>
+</div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  resizeWindow();
+  $(window).resize(function() {
+       resizeWindow();
+  });
+
+  $(".avatarBody").click(function(){
+    id = $(this).attr("id");
+    alert(id);
+
+
+  });
+
+
+  function resizeWindow()
+  {
+       var  alturaVentana = $(window).height();
+            // console.log(alturaVentana);
+            $("#left").css('height', alturaVentana).css('min-height', alturaVentana);
+            $("#center").css('height', alturaVentana).css('min-height', alturaVentana);
+            $("#right").css('height', alturaVentana).css('min-height', alturaVentana);
+
+  }
+  });
+</script>
