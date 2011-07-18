@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" title="html5doctor.com Reset Stylesheet" />
+    <!-- general stylesheet contains some default styles, you do not need this, but it helps you keep a uniform style -->
+    <link rel="stylesheet" type="text/css" href="css/general.css" media="screen" />
+     <!-- grid's will help you keep your website appealing to your users, view 52framework.com website for documentation -->
+    <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/ayuda.css" media="screen" />
+        <script src="js/jquery-1.6.2.min.js"></script><!-- this is the javascript allowing html5 to run in older browsers -->
+
+
+
+  <title>Compiladores e interpretes::Diagramas Tombstone</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+<div id="header" class="gradiente" >
+  <img src="images/logo.png" alt="logoMiTarjetaPersonal" class="logoPequeno" />
+</div>
+<div id="top" class="box_shadow gradiente">
+
+</div>
+<div id="left" >
+     <a href="help.html" ><img src="images/info_32x32.png" alt="InfBasica" />Informacion Básica</a>
+     <a href="manual.html" ><img src="images/help_32x32.png" alt="DirTelf" />Manual de uso</a>
+     <a href="autores.html" class="current"><img src="images/user.png" alt="DirTelf" />Autores</a>
+</div>
+
+<div id="center">
+ <div class="contenido">
+    <h3>Autores</h3>
+    <p><strong>Anthonny Crespo</strong>::<a href="mailto: anthonny.crespo@gmail.com">anthonny.crespo@gmail.com</a></p>
+   <p><strong>Jesus Colmenares</strong>::<a href="mailto: jesuscolorozco@gmail.com">jesuscolorozco@gmail.com</a></p>
+   <p><strong>Orlando Becerra</strong>::<a href="mailto: orlandobcrra@gmail.com">orlandobcrra@gmail.com</a></p>
+
+
+
+ </div>  <!-- fin contenido -->
+</div>
+<div id="footer" class="gradiente">
+ <div class="row">
+    <div class=" col_16 col">
+     <p class="align_center" style="color: #A0A0A0;">mitarjetapersonal.com.ve &copy;  Todos los derechos reservados 2010-2012</p>
+    </div>
+
+ </div>
+</div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  resizeWindow();
+  $(window).resize(function() {
+       resizeWindow();
+  });
+
+  $(".avatarBody").click(function(){
+    id = $(this).attr("id");
+    alert(id);
+
+
+  });
+
+
+  function resizeWindow()
+  {
+       var  alturaVentana = $(window).height();
+            // console.log(alturaVentana);
+            $("#left").css('height', alturaVentana).css('min-height', alturaVentana);
+            $("#center").css('height', alturaVentana).css('min-height', alturaVentana);
+            $("#right").css('height', alturaVentana).css('min-height', alturaVentana);
+
+  }
+  });
+</script>
