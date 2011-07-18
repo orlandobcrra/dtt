@@ -43,16 +43,18 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         editar.addActionListener(controlador);
         eliminar.addActionListener(controlador);
         separar.addActionListener(controlador);
+        duplicar.addActionListener(controlador);
 
         jScrollPane1.setViewportView(lienzoController.getVista());
 
         enunciadoArea.setText(modelo.getEnunciado());
         nombreField.setText(modelo.getNombre());
 
+        jPopupMenu1.add(agregar);
         jPopupMenu1.add(editar);
+        jPopupMenu1.add(duplicar);
         jPopupMenu1.add(separar);
         jPopupMenu1.add(eliminar);
-        jPopupMenu1.add(agregar);
 
         this.addWindowListener(new java.awt.event.WindowAdapter() {
 
@@ -110,6 +112,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         editar = new javax.swing.JMenuItem();
         eliminar = new javax.swing.JMenuItem();
         separar = new javax.swing.JMenuItem();
+        duplicar = new javax.swing.JMenuItem();
         ayuda = new javax.swing.JMenu();
         ayudaContenido = new javax.swing.JMenuItem();
         acercaDe = new javax.swing.JMenuItem();
@@ -152,7 +155,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)))
+                        .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,7 +168,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -212,6 +215,9 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         separar.setText("Separar");
         agregar.add(separar);
 
+        duplicar.setText("Duplicar");
+        agregar.add(duplicar);
+
         jMenuBar1.add(agregar);
 
         ayuda.setText("Ayuda");
@@ -252,6 +258,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
     private javax.swing.JMenu ayuda;
     public javax.swing.JMenuItem ayudaContenido;
     public javax.swing.JMenuItem compilador;
+    public javax.swing.JMenuItem duplicar;
     public javax.swing.JMenuItem editar;
     public javax.swing.JMenuItem eliminar;
     private javax.swing.JTextArea enunciadoArea;

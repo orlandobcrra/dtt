@@ -3,6 +3,8 @@ package unet.compiladores.diagramas.modelo.componentes;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
+import javax.swing.SwingUtilities;
+import unet.compiladores.diagramas.modelo.util.UnirFiguras;
 
 /**
  *
@@ -38,8 +40,11 @@ public class Programa extends Figura {
     @Override
     public void dibujar(Graphics2D g) {
         super.dibujar(g);
-        g.drawString(nombre, posicion.x + 10, posicion.y + -10);
-        g.drawString(lenguaje, posicion.x + 10, posicion.y + 30);
+        int ancho=0;
+        ancho= SwingUtilities.computeStringWidth(g.getFontMetrics(), nombre);
+        g.drawString(nombre, posicion.x + (TAM - ancho)/2, posicion.y + -10);
+        ancho= SwingUtilities.computeStringWidth(g.getFontMetrics(), lenguaje);
+        g.drawString(lenguaje, posicion.x + (TAM - ancho)/2, posicion.y + 30);
     }
 
     //@Override
@@ -61,46 +66,41 @@ public class Programa extends Figura {
         return nombre;
     }
 
+    public void setaLaDerechaDelPrograma(boolean aLaDerechaDelPrograma) {
+        this.aLaDerechaDelPrograma = aLaDerechaDelPrograma;
+    }
+
+    
+    
+
     @Override
     public boolean pegar(Figura f) {
         if (f instanceof Compilador) {
-            if (posicion.x <= f.posicion.x + (3 * TAM / 2)) {
-                if (f.unidos[3] == null && this.unidos[2] == null) {
-                    Point px = new Point(f.posicion.x, f.posicion.y);
-                    px.x -= TAM;
-                    this.posicionar(px, true);
-                    this.aLaDerechaDelPrograma = true;
-                    return true;
-                }
-            }
-            if (posicion.x > f.posicion.x + (3 * TAM / 2)) {
-                if (f.unidos[2] == null && this.unidos[3] == null) {
-                    Point px = new Point(f.posicion.x, f.posicion.y);
-                    px.x += 3 * TAM;
-                    this.posicionar(px, true);
-                    this.aLaDerechaDelPrograma = false;
-                    return true;
-                }
-            }
+            UnirFiguras.pegarProgramaCompilador((Compilador)f, this);
+            
+        }
+            if ((f instanceof Interprete)){
+                UnirFiguras.pegarProgramaInterprete((Interprete)f, this);
+        }
+            
+          if ((f instanceof Maquina)){
+              UnirFiguras.pegarProgramaMaquina((Maquina)f, this);
         }
         return false;
     }
 
     @Override
     public Figura unir(Figura f) {
-        if (f instanceof Compilador
-                && aLaDerechaDelPrograma
-                && f.unidos[3] == null
-                && this.unidos[2] == null) {
-            f.unidos[3] = this;
-            this.unidos[2] = f;
+        if ((f instanceof Compilador)){
+            UnirFiguras.unirProgramaCompilador(this, (Compilador)f,aLaDerechaDelPrograma);
         }
-        if (f instanceof Compilador
-                && !aLaDerechaDelPrograma
-                && f.unidos[2] == null
-                && this.unidos[3] == null) {
-            f.unidos[2] = this;
-            this.unidos[3] = f;
+
+        if ((f instanceof Interprete)){
+            UnirFiguras.unirProgramaInterprete(this, (Interprete)f);
+        }
+        
+        if ((f instanceof Maquina)){
+            UnirFiguras.unirProgramaMaquina(this, (Maquina)f);
         }
         return null;
     }
@@ -111,4 +111,12 @@ public class Programa extends Figura {
         int dY = p.y - posicion.y - TAM;
         //mover(dx, dY, true);
     }
+    
+    @Override
+    public Figura duplicar(){
+        Point p= new Point(posicion.x+40, posicion.y+40);            
+        Programa pr = new Programa(p, TAM);
+        pr.setDatos(this.nombre, this.lenguaje);
+        return pr;
+        }
 }

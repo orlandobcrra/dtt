@@ -13,13 +13,14 @@ public abstract class Figura {
     protected Color colorInvertido;
     protected Polygon poligono;
     protected Point posicion;
-    protected boolean seleccionada;
+
+        protected boolean seleccionada;
     // 0 = arriba . 1 = abajo . 2 = derecha . 3 = izquierda
     protected Figura[] unidos = new Figura[4];
     //
     protected boolean yaSeMovio;
     protected int TAM = 0;
-
+    
     public Figura(int TAM) {
         this.TAM = TAM;
         posicion = new Point(0, 0);
@@ -86,6 +87,8 @@ public abstract class Figura {
     public abstract Figura unir(Figura c);
 
     public abstract boolean pegar(Figura c);
+    
+    public abstract Figura duplicar() ;
 
     public void setColor(Color color) {
         this.color = color;
@@ -108,6 +111,17 @@ public abstract class Figura {
         return TAM;
     }
 
+    public Figura[] getUnidos() {
+        return unidos;
+    }
+    
+    public Point getPosicion() {
+        return posicion;
+    }
+    
+    
+    
+
     public void dibujar(Graphics2D g) {
         g.setColor(color);
         g.fillPolygon(poligono);
@@ -119,4 +133,6 @@ public abstract class Figura {
         g.drawPolygon(poligono);
         g.setColor(colorInvertido);
     }
+
+    
 }

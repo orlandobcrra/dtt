@@ -3,7 +3,8 @@ package unet.compiladores.diagramas.modelo.componentes;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
-import unet.compiladores.diagramas.modelo.Modelo;
+import javax.swing.SwingUtilities;
+import unet.compiladores.diagramas.modelo.util.UnirFiguras;
 
 /**
  *
@@ -31,7 +32,9 @@ public class Maquina extends Figura {
     @Override
     public void dibujar(Graphics2D g) {
         super.dibujar(g);
-        g.drawString(nombre, posicion.x + 5, posicion.y + 25);
+        int ancho=0;
+        ancho = SwingUtilities.computeStringWidth(g.getFontMetrics(), nombre);
+        g.drawString(nombre, posicion.x + (TAM - ancho)/2, posicion.y + 25);
     }
 
     //@Override
@@ -50,42 +53,31 @@ public class Maquina extends Figura {
 
     @Override
     public boolean pegar(Figura f) {
-        if (f instanceof Compilador
-                && f.unidos[1] == null
-                && this.unidos[0] == null
-                && ((Compilador)f).getImplementacion().equals(nombre)) {
-            Point px = new Point(f.posicion.x, f.posicion.y);
-            px.x += TAM;
-            px.y += TAM * 2;
-            this.posicionar(px, true);
-            return true;
+        if (f instanceof Compilador){
+            UnirFiguras.pegarMaquinaCompilador((Compilador)f, this);
         }
-        if (f instanceof Interprete
-                && f.unidos[1] == null
-                && this.unidos[0] == null
-                && ((Interprete)f).getM().equals(nombre)) {
-            Point px = new Point(f.posicion.x, f.posicion.y);
-            px.y += TAM * 2;
-            this.posicionar(px, true);
-            return true;
+
+        if (f instanceof Interprete){
+            UnirFiguras.pegarMaquinaInterprete((Interprete)f, this);
+        }
+        
+         if (f instanceof Programa){
+             UnirFiguras.pegarProgramaMaquina((Programa)f, this);
         }
         return false;
     }
 
     @Override
     public Figura unir(Figura f) {
-        if ((f instanceof Compilador)
-                && f.unidos[1] == null
-                && this.unidos[0] == null
-                &&  ((Compilador)f).getImplementacion().equals(nombre)) {
-            f.unidos[1] = this;
-            this.unidos[0] = f;
+        if ((f instanceof Compilador)){
+            UnirFiguras.unirCompiladorMaquina((Compilador)f, this);
         }
-        if ((f instanceof Interprete)
-                && f.unidos[1] == null
-                && this.unidos[0] == null) {
-            f.unidos[1] = this;
-            this.unidos[0] = f;
+        
+        if ((f instanceof Interprete)){
+            UnirFiguras.unirInterpreteMaquina((Interprete)f, this);
+        }
+        if ((f instanceof Programa)){
+            UnirFiguras.unirProgramaMaquina((Programa)f, this);
         }
         return null;
     }
@@ -96,4 +88,12 @@ public class Maquina extends Figura {
         int dY = p.y - posicion.y - TAM;
         //mover(dx, dY, true);
     }
+
+        @Override
+    public Figura duplicar(){
+        Point p= new Point(posicion.x+40, posicion.y+40);
+        Maquina m = new Maquina(p, TAM);
+        m.setDatos(this.nombre);
+        return m;
+        }
 }

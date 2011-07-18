@@ -3,6 +3,8 @@ package unet.compiladores.diagramas.modelo.componentes;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
+import javax.swing.SwingUtilities;
+import unet.compiladores.diagramas.modelo.util.UnirFiguras;
 
 /**
  *
@@ -13,7 +15,7 @@ public class Compilador extends Figura {
     private String fuente = "";
     private String objeto = "";
     private String implementacion = "";
-    private boolean aLaDerechaDelPrograma;
+    private boolean yoEncimaYaMiDerecha;
 
     public Compilador(int TAM) {
         this(new Point(0, 0), TAM);
@@ -47,11 +49,14 @@ public class Compilador extends Figura {
     }
 
     @Override
-    public void dibujar(Graphics2D g) {
+    public void dibujar(Graphics2D g){
         super.dibujar(g);
-        g.drawString(fuente, posicion.x + 5, posicion.y + 20);
-        g.drawString(objeto, posicion.x + 80, posicion.y + 20);
-        g.drawString(implementacion, posicion.x + 45, posicion.y + 70);
+        int ancho=0;
+        ancho = SwingUtilities.computeStringWidth(g.getFontMetrics(), fuente);
+        g.drawString(fuente, posicion.x + (TAM - ancho)/2, posicion.y + 20);
+        g.drawString(objeto, posicion.x + (TAM *2), posicion.y + 20);
+        ancho = SwingUtilities.computeStringWidth(g.getFontMetrics(), implementacion);
+        g.drawString(implementacion,posicion.x + ((TAM/2 + TAM) - ancho/2), posicion.y + 70);
     }
 
     //@Override
@@ -78,86 +83,58 @@ public class Compilador extends Figura {
         return objeto;
     }
 
+    public boolean isYoEncimaYaMiDerecha() {
+        return yoEncimaYaMiDerecha;
+    }
+
+    public void setYoEncimaYaMiDerecha(boolean yoEncimaYaMiDerecha) {
+        this.yoEncimaYaMiDerecha = yoEncimaYaMiDerecha;
+    }
+    
+    
+
     @Override
     public boolean pegar(Figura p) {
-        if ((p instanceof Interprete || p instanceof Maquina)
-                && p.unidos[0] == null
-                && this.unidos[1] == null) {
-            Point px = new Point(p.posicion.x, p.posicion.y);
-            px.x -= TAM;
-            px.y -= TAM * 2;
-            this.posicionar(px, true);
-            return true;
+        if ((p instanceof Maquina)){
+            UnirFiguras.pegarMaquinaCompilador((Maquina)p, this);
         }
+        
+        if ((p instanceof Interprete)){
+            UnirFiguras.pegarCompiladorInterprete((Interprete)p, this);
+        }
+        
         if (p instanceof Programa) {
-            if (posicion.x <= p.posicion.x + (TAM / 2)) {
-                if (p.unidos[3] == null && this.unidos[2] == null) {
-                    Point px = new Point(p.posicion.x, p.posicion.y);
-                    px.x -= 3 * TAM;
-                    this.posicionar(px, true);
-                    this.aLaDerechaDelPrograma = false;
-                    return true;
-                }
-            }
-            if (posicion.x > p.posicion.x + (TAM / 2)) {
-                if (p.unidos[2] == null && this.unidos[3] == null) {
-                    Point px = new Point(p.posicion.x, p.posicion.y);
-                    px.x += TAM;
-                    this.posicionar(px, true);
-                    this.aLaDerechaDelPrograma = true;
-                    return true;
-                }
-            }
+
+            UnirFiguras.pegarProgramaCompilador((Programa)p, this);
         }
         if (p instanceof Compilador) {
-            if (posicion.x <= p.posicion.x + (3 * TAM / 2)) {
-                if (p.unidos[3] == null && this.unidos[2] == null) {
-                    Point px = new Point(p.posicion.x, p.posicion.y);
-                    px.y -= TAM;
-                    px.x -= 2 * TAM;
-                    this.posicionar(px, true);
-                    this.aLaDerechaDelPrograma = false;
-                    return true;
-                }
-            }
-            if (posicion.x > p.posicion.x + (3 * TAM / 2)) {
-                if (p.unidos[2] == null && this.unidos[1] == null) {
-                    Point px = new Point(p.posicion.x, p.posicion.y);
-                    px.y -= TAM;
-                    px.x += 2 * TAM;
-                    this.posicionar(px, true);
-                    this.aLaDerechaDelPrograma = true;
-                    return true;
-                }
-            }
+            
+            UnirFiguras.pegarCompiladorCompilador((Compilador)p, this);
         }
         return false;
     }
 
     @Override
     public Figura unir(Figura f) {
-        if ((f instanceof Interprete || f instanceof Maquina)
-                && f.unidos[0] == null
-                && this.unidos[1] == null) {
-            f.unidos[0] = this;
-            this.unidos[1] = f;
+        if ((f instanceof Interprete)){
+            UnirFiguras.unirInterpreteCompilador((Interprete)f, this);
         }
-        if ((f instanceof Programa || f instanceof Compilador)
-                && aLaDerechaDelPrograma
-                && f.unidos[2] == null
-                && this.unidos[3] == null) {
-            f.unidos[2] = this;
-            this.unidos[3] = f;
+        
+        if ((f instanceof Maquina)){
+            UnirFiguras.unirCompiladorMaquina(this,(Maquina)f);
         }
-        if ((f instanceof Programa || f instanceof Compilador)
-                && !aLaDerechaDelPrograma
-                && f.unidos[3] == null
-                && this.unidos[2] == null) {
-            f.unidos[3] = this;
-            this.unidos[2] = f;
+        
+        if ((f instanceof Compilador)){
+            UnirFiguras.unirCompiladorCompilador((Compilador)f, this);
         }
+        if ((f instanceof Programa)){
+            UnirFiguras.unirProgramaCompilador((Programa)f, this,yoEncimaYaMiDerecha);
+        }
+
         return null;
     }
+
+    
 
     @Override
     public void centrar(Point p) {
@@ -165,4 +142,12 @@ public class Compilador extends Figura {
         int dY = p.y - posicion.y - TAM;
         //mover(dx, dY, true);
     }
+    
+    @Override
+    public Figura duplicar(){
+        Point p= new Point(posicion.x+80, posicion.y+80);
+        Compilador c = new Compilador(p, TAM);
+        c.setDatos(this.fuente, this.objeto, this.implementacion);
+        return c;
+        }
 }
