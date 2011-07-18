@@ -39,6 +39,7 @@ public class CompiladorEditor extends javax.swing.JDialog {
         this.setLocation(
                 (owner.getSize().width - this.getSize().width) / 2 + owner.getLocation().x,
                 (owner.getSize().height - this.getSize().height) / 2 + owner.getLocation().y);
+        this.getRootPane().setDefaultButton(jButton1);
         this.setVisible(true);
     }
 

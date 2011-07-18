@@ -41,7 +41,7 @@ public class ProgramaEditor extends javax.swing.JDialog {
         //para el color del boton
         this.jButton2.setBackground(figuraModelo.getColor());
         this.jButton2.setForeground(figuraModelo.getColorInvertido());
-        
+        this.getRootPane().setDefaultButton(jButton1);
         this.setVisible(true);
     }
 
