@@ -44,7 +44,8 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         eliminar.addActionListener(controlador);
         separar.addActionListener(controlador);
         duplicar.addActionListener(controlador);
-
+        salir.addActionListener(controlador);
+        
         jScrollPane1.setViewportView(lienzoController.getVista());
 
         enunciadoArea.setText(modelo.getEnunciado());
@@ -104,6 +105,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         abrir = new javax.swing.JMenuItem();
         guardar = new javax.swing.JMenuItem();
         exportar = new javax.swing.JMenuItem();
+        salir = new javax.swing.JMenuItem();
         agregar = new javax.swing.JMenu();
         compilador = new javax.swing.JMenuItem();
         maquina = new javax.swing.JMenuItem();
@@ -131,7 +133,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +152,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -189,6 +191,9 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         exportar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
         exportar.setText("Exportar");
         archivo.add(exportar);
+
+        salir.setText("Salir");
+        archivo.add(salir);
 
         jMenuBar1.add(archivo);
 
@@ -237,13 +242,13 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 960, Short.MAX_VALUE)
+            .addGap(0, 965, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 573, Short.MAX_VALUE)
+            .addGap(0, 579, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -276,6 +281,7 @@ public class AreaDeTrabajo extends javax.swing.JFrame {
     private javax.swing.JTextField nombreField;
     public javax.swing.JMenuItem nuevo;
     public javax.swing.JMenuItem programa;
+    public javax.swing.JMenuItem salir;
     public javax.swing.JMenuItem separar;
     private javax.swing.ButtonGroup tipoComponente;
     // End of variables declaration//GEN-END:variables

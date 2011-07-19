@@ -62,7 +62,9 @@ public class AreaDeTrabajoController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(vista.compilador)) {
+        if (e.getSource().equals(vista.salir)) {
+            System.exit(0);
+        } else if (e.getSource().equals(vista.compilador)) {
             agregarCompilador();
         } else if (e.getSource().equals(vista.maquina)) {
             agregarMaquina();
@@ -171,7 +173,6 @@ public class AreaDeTrabajoController implements ActionListener {
             }
         }
     }
-    
 
     private void restaurar() {
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dataBaseName);
