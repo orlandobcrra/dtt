@@ -135,7 +135,7 @@ public class AreaDeTrabajoController implements ActionListener {
 
     public void mostrarAyuda() {
         try {
-            java.awt.Desktop.getDesktop().open(new File("./help.html"));
+            java.awt.Desktop.getDesktop().open(new File("./ayuda/help.html"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

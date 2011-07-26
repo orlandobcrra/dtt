@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" title="html5doctor.com Reset Stylesheet" />
+    <!-- general stylesheet contains some default styles, you do not need this, but it helps you keep a uniform style -->
+    <link rel="stylesheet" type="text/css" href="css/general.css" media="screen" />
+     <!-- grid's will help you keep your website appealing to your users, view 52framework.com website for documentation -->
+    <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/ayuda.css" media="screen" />
+        <script src="js/jquery-1.6.2.min.js"></script><!-- this is the javascript allowing html5 to run in older browsers -->
+
+
+
+  <title>Compiladores e interpretes::Diagramas Tombstone</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+<div id="header" class="gradiente" >
+  <img src="images/logo.png" alt="logoMiTarjetaPersonal" class="logoPequeno" />
+</div>
+<div id="top" class="box_shadow gradiente">
+
+</div>
+<div id="left" >
+     <a href="help.html" class="current"><img src="images/info_32x32.png" alt="InfBasica" />Informacion Básica</a>
+     <a href="manual.html"><img src="images/help_32x32.png" alt="DirTelf" />Manual de uso</a>
+     <a href="autores.html"><img src="images/user.png" alt="DirTelf" />Autores</a>
+</div>
+
+<div id="center">
+ <div class="contenido">
+    <h3>Diagramas Tombstone</h3>
+    <p>
+        Los diagramas de Tombstone también denominados diagramas en T se  utilizan
+        para poder captar claramente todo el camino en el diseño y construcción de
+        compiladores de una manera muy visual. Hay cuatro tipos distintos de diagramas en T:
+   </p>
+   <p><strong>Compilador:</strong> Los 3 lenguajes que definen un compilador se pueden
+   representar como se ve en la figura a continuacion: el lenguaje fuente
+   (origen), el objeto (destino) y el que usa el propio compilador
+   (implementación). </p>
+    <img src="images/compilador.png"  />
+    <p><strong>Programa:</strong> Representa el programa P escrito en lenguaje L.  </p>
+    <img src="images/programa.png"  />
+    <p><strong>Máquina:</strong>  Indica la plataforma de ejecución, el sistema operativo o el   ordenador de ejecución M.</p>
+     <img src="images/maquina.png"  />
+     <p><strong>Intérprete:</strong> Representa el intérprete del lenguaje L escrito en M. </p>
+     <img src="images/interprete.png"  />
+     <br><br>
+     <p>Utilizando distintas combinaciones de los 4 diagramas básicos se pueden
+        diseñar los pasos necesarios para la creación de los compiladores o para la
+        ejecución de los programas. Para unir dos diagramas se utilizan unas reglas d
+        eunión básicas que aseguran su coherencia: dos diagramas se pueden unir si los
+        lenguajes que se tocan en el punto de unión son iguales: </p>
+
+      <h3>Diagramas Tombstone::Compilador enlazador</h3>
+      <p>Esta técnica divide el proceso de traducción en dos partes: en la
+        primera utiliza un traductor del lenguaje fuente a un código intermedio
+        y, en la segunda, utiliza otro para traducir el código intermedio al
+        lenguaje objeto. Como ya hemos visto esta división resulta  muy útil
+        cuando se deben desarrollar diferentes compiladores para distintas
+        plataformas </p>
+
+      <h3>Diagramas Tombstone::Compilador cruzado</h3>
+      <p>Esta técnica genera código objeto para un ordenador
+         distinto del que lleva a cabo la compilación. Muchas veces hay que
+         desarrollar compiladores para máquinas que todavía o existes y es
+         entonces cuando reutiliza esta técnica. En el ejemplo lateral la idea
+         consiste en escribir L con el compilador para la nueva máquina MX que
+         todavía no tenemos disponible. Una vez escrito con una  máquina que tenga
+         disponible un compilador de L (2) obtenemos un compilador que genera
+         código para la nueva máquina MX pero que se ejecuta en la vieja M. </p>
+
+        <h3>Diagramas Tombstone::Bootstrapping</h3>
+       <p>En general, cuando se desarrolla u nuevo compilador, se
+        parte de una base ya existente y se aprovecha la organización conocida para
+        acelerar el proceso: normalmente se aprovecha algún lenguaje de alto nivel
+        para crear el nuevo compilador. Un autocompilador está escrito en el mismo
+        lenguaje que se quiere compilar. Por ejemplo si se quiere crear la versión 8 del
+        compilador de Fortran y se tiene disponible la versión 7, el nuevo compilador
+        debería generar un código de ejecución más rápido y eficiente que el de la
+        versión anterior. Dado que hay muchas máquinas que disponen de Fortran 7,
+        es mejor desarrollar la nueva versión en Fortran, de esta manera, el compilador
+        de Fortran 8 podrá crearse y estar disponible en todas las máquinas que ya
+        tienen el compilador de Fortran 7. </p>
+
+          <h3>Diagramas Tombstone::Compiladores interpretativos </h3>
+       <p> A veces interesa compilar rápidamente el
+programa fuente para comprobar que esté libre de errores y generar, al mismo
+tiempo, un código intermedio sencillo. Después, éste código intermedio puede
+ser distribuido a diferentes plataformas en las que se utilizará un intérprete
+para ejecutarlo. La unión del intérprete y la plataforma de ejecución es lo que
+se denomina máquina virtual. Java es un ejemplo de compilador interpretativo,
+primero se compila para dejar un código libre de errores y después, como se ve
+en la imagen lateral, se utiliza la Java Virtual Machina (JVM) de cada plataforma
+para interpretar el código intermedio.
+</p>
+
+          <h3>Diagramas Tombstone::Algunos ejemplos </h3>
+         <img src="../sitio/images/ejemplo1.png" alt="ejemplo1" /><br><br><br><br>
+           <img src="../sitio/images/ejemplo2.png" alt="ejemplo1" />
+
+ </div>  <!-- fin contenido -->
+</div>
+<div id="footer" class="gradiente">
+ <div class="row">
+    <div class=" col_16 col">
+     <p class="align_center" style="color: #A0A0A0;">mitarjetapersonal.com.ve &copy;  Todos los derechos reservados 2010-2012</p>
+    </div>
+
+ </div>
+</div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  resizeWindow();
+  $(window).resize(function() {
+       resizeWindow();
+  });
+
+  $(".avatarBody").click(function(){
+    id = $(this).attr("id");
+    alert(id);
+
+
+  });
+
+
+  function resizeWindow()
+  {
+       var  alturaVentana = $(window).height();
+            // console.log(alturaVentana);
+            $("#left").css('height', alturaVentana).css('min-height', alturaVentana);
+            $("#center").css('height', alturaVentana).css('min-height', alturaVentana);
+            $("#right").css('height', alturaVentana).css('min-height', alturaVentana);
+
+  }
+  });
+</script>
