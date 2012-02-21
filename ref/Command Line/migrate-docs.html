@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>ProyectoA1 0.1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass(el) {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/introduccion.html"><strong>1</strong><span>Introducci&oacute;n</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/primerosPasos.html"><strong>2</strong><span>Primeros pasos</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/scaffold.html"><strong>3</strong><span>new css + scaffold, simple (CRUD)</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/dbconsole.html"><strong>4</strong><span>DB Consola</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/aLaNube.html"><strong>5</strong><span>A la nube &uarr;</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/documentacion.html"><strong>6</strong><span>Documentacion</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/aplicacionCompleta.html"><strong>7</strong><span>Aplicacion Completa</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/reportes.html"><strong>8</strong><span>Reportes con iReport y JaspertReports</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/seguridad.html"><strong>9</strong><span>Seguridad</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>ProyectoA1</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="reference corner-all">
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                <h1>migrate-docs</h1><p class="paragraph"/><h2>Purpose</h2><p class="paragraph"/>Migrates old style gdocs in which the section numbers are in the file names to the new approach where section numbers and titles are put into a toc.yml file.<p class="paragraph"/><h2>Examples</h2><p class="paragraph"/><div class="code"><pre>grails migrate&#45;docs</pre></div><p class="paragraph"/><h2>Description</h2><p class="paragraph"/>Originally, the source files for Grails-generated user guides included the section numbers and titles in the gdoc filenames. This made it very easy to get going, but tricky to renumber sections and change their titles since the corresponding URLs would also change. The <code>commandLine</code> command now allows you to specify sections in a table of contents in YAML form, so the guide can be restructured without breaking URLs.<p class="paragraph"/>If you already have a user guide in the old style, then this command will automatically convert the source files to the new format. The gdoc files are created under the directory <code>src/docs/migratedGuide</code> along with:
+<ul class="star">
+<li><code>toc.yml</code> - the YAML table of contents file containing the original user guide structure</li>
+<li><code>links.yml</code> - a map of new section names to old ones (see later for more detail)</li>
+<li><code>rewriteRules.txt</code> - a simple text file containing the mappings from old HTML filenames to new ones</li>
+</ul><p class="paragraph"/>The gdoc files themselves are also renamed, with the section numbers removed and the titles converted into Java property notation. This automatic conversion may not always work particularly well, so be prepared to change gdoc the filenames and their corresponding entries in the above files if necessary. For example,
+<ul class="star">
+<li>12.1 Welcome to the New World.gdoc</li>
+</ul><p class="paragraph"/>will become
+<ul class="star">
+<li>welcomeToTheNewWorld.gdoc</li>
+</ul><p class="paragraph"/>Once the migration has finished, you can replace the <code>src/docs/guide</code> directory with the contents of <code>migratedGuide</code> and run the <code>doc</code> command. This command is aware of the <code>links.yml</code> file and will use it to add legacy links into the generated documentation so that old HTML fragment identifiers will continue to work.<p class="paragraph"/>Of course, old URLs will break because the names of the HTML files have changed. Hence why the <code>rewriteRules</code> file is created: you can use it to create the appropriate Apache HTTPD rewrite rules or the equivalent for your web server.
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">Command Line</h1>
+                        <div class="menu-sub selected">
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/Usage.html">Usage</a></div>
+                            
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/clean.html">clean</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/migrate-docs.html">migrate-docs</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/war.html">war</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    
+    
+</div>
+
+
+<script type="text/javascript" src="../../js/docs.js"></script>
+
+</body>
+</html>

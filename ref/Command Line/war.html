@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>ProyectoA1 0.1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass(el) {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/introduccion.html"><strong>1</strong><span>Introducci&oacute;n</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/primerosPasos.html"><strong>2</strong><span>Primeros pasos</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/scaffold.html"><strong>3</strong><span>new css + scaffold, simple (CRUD)</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/dbconsole.html"><strong>4</strong><span>DB Consola</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/aLaNube.html"><strong>5</strong><span>A la nube &uarr;</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/documentacion.html"><strong>6</strong><span>Documentacion</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/aplicacionCompleta.html"><strong>7</strong><span>Aplicacion Completa</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/reportes.html"><strong>8</strong><span>Reportes con iReport y JaspertReports</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/seguridad.html"><strong>9</strong><span>Seguridad</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>ProyectoA1</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="reference corner-all">
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                <h1>war</h1><p class="paragraph"/><h2>Purpose</h2><p class="paragraph"/>The <code>war</code> command creates a Web Application Archive (WAR) file which can be deployed on any Java EE compliant application server.<p class="paragraph"/><h2>Examples</h2><p class="paragraph"/><div class="code"><pre>grails war
+grails test war
+grails &#45;Dgrails.env=staging war</pre></div><p class="paragraph"/><h2>Description</h2><p class="paragraph"/>Usage:
+<div class="code"><pre>grails &#91;environment&#93;&#42; war &#91;filename&#93;&#42; &#91;arguments&#93;&#42;</pre></div><p class="paragraph"/>Arguments:
+<ul class="star">
+<li><code>filename</code> - The path and name to use in place of the default</li>
+<li><code>nojars</code> - Packages the WAR with no jar files. Used for shared deployment</li>
+</ul><p class="paragraph"/>Fired Events:
+<ul class="star">
+<li><code>StatusFinal</code> - When the WAR file has been created</li>
+</ul><p class="paragraph"/>By default the <code>war</code> command creates a web application archive (WAR) file using the application name and version number. The <code>war</code> command is different from most commands since it runs in the production environment by default instead of development, but like any script the environment can be specified using the standard convention:<p class="paragraph"/><div class="code"><pre>grails test war
+grails dev war
+grails prod war
+grails war /foo/bar/mywar.war
+grails war &#45;&#45;nojars</pre></div><p class="paragraph"/>You can also specify a custom environment:<p class="paragraph"/><div class="code"><pre>grails &#45;Dgrails.env=UAT war</pre></div><p class="paragraph"/>Once the WAR has been created you can deploy it to your container using its standard WAR deployment process.
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">Command Line</h1>
+                        <div class="menu-sub selected">
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/Usage.html">Usage</a></div>
+                            
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/clean.html">clean</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/migrate-docs.html">migrate-docs</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/war.html">war</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    
+    
+</div>
+
+
+<script type="text/javascript" src="../../js/docs.js"></script>
+
+</body>
+</html>

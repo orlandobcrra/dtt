@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>3 new css + scaffold, simple (CRUD) 0.1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass() {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs" style="display:none;">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/introduccion.html"><strong>1</strong><span>Introducci&oacute;n</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/primerosPasos.html"><strong>2</strong><span>Primeros pasos</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/scaffold.html"><strong>3</strong><span>new css + scaffold, simple (CRUD)</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/dbconsole.html"><strong>4</strong><span>DB Consola</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/aLaNube.html"><strong>5</strong><span>A la nube &uarr;</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/documentacion.html"><strong>6</strong><span>Documentacion</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/aplicacionCompleta.html"><strong>7</strong><span>Aplicacion Completa</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/reportes.html"><strong>8</strong><span>Reportes con iReport y JaspertReports</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/seguridad.html"><strong>9</strong><span>Seguridad</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>ProyectoA1</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+
+                
+                    <div class="toc-item prev-left"><a href="../guide/primerosPasos.html">&lt;&lt; <strong>2</strong><span>Primeros pasos</span></a></div>
+                
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                
+                    <div class="toc-item next-right"><a href="../guide/dbconsole.html"><strong>4</strong><span>DB Consola</span> >></a></div>
+                
+
+
+                <div class="project">
+                    <h1>3 new css + scaffold, simple (CRUD) - Reference Documentation</h1>
+
+                    <p><strong>Authors:</strong> Orlando Becerra</p>
+
+                    <p><strong>Version:</strong> 0.1</p>
+
+                    
+                </div>
+
+                
+
+                
+
+<h1 id="scaffold">3 new css + scaffold, simple (CRUD)</h1>
+http://grails-plugins.github.com/grails-cloud-foundry/docs/manual/guide/index.html
+http://blog.springsource.com/2011/04/12/one-step-deployment-with-grails-and-cloud-foundry/
+http://grails-plugins.github.com/grails-cloud-foundry-ui/docs/manual/guide/index.html<p class="paragraph"/>
+https://github.com/robokaso/grails-kickstart<p class="paragraph"/>http://grails.org/plugin/kickstart-with-bootstrap<p class="paragraph"/>After installation you can call "grails kickstartWithBootstrap" which will copy several files into your project. It will overwrite only few files (e.g., in conf, src, and views) - you should use it only on fresh new Grails project.<p class="paragraph"/>Afterwards create your domain classes (or copy them into the project) and generate contollers and views - they will now use the Bootstrap framework!<p class="paragraph"/>
+grails install-plugin kickstart-with-bootstrap<p class="paragraph"/>grails kickstart-with-bootstrap<p class="paragraph"/>Replacing exisiting views and installing new ones &#8230;
+Overwrite existing layouts &#38; base GSPs (e.g., index.gsp)
+  in C:&#85;sers&#80;ersonal&#68;ocuments&#78;etBeansProjects&#80;royectoA1/grails-app/views?y,n<p class="paragraph"/>Adding the Home controller &#8230;
+&#62; 
+Overwrite existing HomeController.groovy file
+  in C:&#85;sers&#80;ersonal&#68;ocuments&#78;etBeansProjects&#80;royectoA1/grails-app/controllers/?y,n<p class="paragraph"/>Installing css, js, and images for Bootstrap &#8230;
+Installing and changing conf files &#8230;
+&#62; 
+Overwrite existing URLMappings.groovy file
+  in C:&#85;sers&#80;ersonal&#68;ocuments&#78;etBeansProjects&#80;royectoA1/grails-app/conf/?y,n<p class="paragraph"/>| Kickstart installed successfully<p class="paragraph"/><p class="paragraph"/>default.language.button<p class="paragraph"/>BuildConfig.groovy :
+dependencies {
+        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.<p class="paragraph"/>        // runtime 'mysql:mysql-connector-java:5.1.16'
+        runtime 'postgresql:postgresql:8.4-702.jdbc3' xxxxx
+    }<p class="paragraph"/>grails integrate-with <strike class="strike">git<p class="paragraph"/>
+clic derecho / control de versiones/ Inicializar Repositorio Git<p class="paragraph"/>cd / git / commit<p class="paragraph"/>heroku create </strike>stack cedar<p class="paragraph"/>Create Heroku Cedar app:<p class="paragraph"/>$ heroku create --stack cedar
+Creating smooth-night-8061&#8230; done, stack is cedar
+http://smooth-night-8061.herokuapp.com/ | git@heroku.com:smooth-night-8061.git
+Git remote heroku added
+Deploy to Heroku:<p class="paragraph"/><p class="paragraph"/>
+$ git push heroku master
+Counting objects: 73, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (69/69), done.
+Writing objects: 100% (73/73), 97.82 KiB, done.
+Total 73 (delta 2), reused 0 (delta 0)<p class="paragraph"/><hr class="line"/>&#62; Heroku receiving push
+<hr class="line"/>&#62; Grails app detected
+<hr class="line"/>&#62; Grails 2.0.0 app detected
+<hr class="line"/>&#62; Installing Grails 2.0.0..... done
+<hr class="line"/>&#62; executing grails -plain-output -Divy.default.ivy.user.dir=/app/tmp/repo.git/.cache war<p class="paragraph"/>       |Loading Grails 2.0.0.
+       &#8230;
+       |Done creating WAR target/HelloWorld-0.1.war
+<hr class="line"/>&#62; No server directory found. Adding jetty-runner 7.5.4.v20111024 automatically.
+<hr class="line"/>&#62; Discovering process types
+       Procfile declares types  -&#62; (none)
+       Default types for Grails -&#62; web
+<hr class="line"/>&#62; Compiled slug size is 30.6MB
+<hr class="line"/>&#62; Launching&#8230; done, v3
+       http://smooth-night-8061.herokuapp.com deployed to Heroku<p class="paragraph"/>
+ heroku open<p class="paragraph"/><p class="paragraph"/>
+
+
+
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../guide/primerosPasos.html">&lt;&lt; <strong>2</strong><span>Primeros pasos</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../guide/dbconsole.html"><strong>4</strong><span>DB Consola</span> >></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Command Line</h1><div class="menu-sub">
+                        
+                            <div class="menu-item"><a href="../ref/Command%20Line/Usage.html">Usage</a></div>
+                            
+                            
+                            <div class="menu-item"><a href="../ref/Command%20Line/clean.html">clean</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Command%20Line/migrate-docs.html">migrate-docs</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Command%20Line/war.html">war</a>
+                            </div>
+                            
+                            </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    
+    
+</div>
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+</body>
+</html>
